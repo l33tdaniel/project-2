@@ -1,0 +1,11 @@
+*.log
+npm-debug.log*
+node_modules/
+/dist/
+/build/
+/exclude/
+/bin/
+.DS_Store
+.idea/
+.vscode/
+*.suo

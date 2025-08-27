@@ -1,0 +1,31 @@
+{
+  "name": "eecs581-minesweeper",
+  "version": "0.1.0",
+  "description": "A game of minesweeper in js/html for eecs581 at KU",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/addiebart/eecs581-minesweeper.git"
+  },
+  "keywords": [
+    "minesweeper",
+    "game",
+    "games",
+    "class-project"
+  ],
+  "author": "group11",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/addiebart/eecs581-minesweeper/issues"
+  },
+  "homepage": "https://github.com/addiebart/eecs581-minesweeper#readme",
+  "devDependencies": {
+    "typescript": "^5.9.2"
+  }
+}

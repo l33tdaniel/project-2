@@ -7,7 +7,7 @@
 @returns 2D array that represents a generated minefield
 */
 
-function generateMinefield(
+export function generateMinefield(
     Fclick: {row: number, col: number},
     rows: number, 
     cols: number,

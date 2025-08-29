@@ -1,9 +1,5 @@
-console.log("Hello!");
 
-
-
-/**
- added  minefield generation function here for testing purposes, ESM import/export is causing conflicts with webpack 
+/** 
 @param rows - # of rows in the minefield
 @param cols- # of columns in the minefield
 @param mineCount- # of mines to place in minefield
@@ -55,9 +51,3 @@ function generateMinefield(
         // Fallback return in case the above code path is not taken
         return Array.from({ length: rows }, () => Array(cols).fill(0));
     }
-
-
-
-
-const minefield = generateMinefield({ row: 3, col: 5 }, 10, 10, 1, 10);
-console.table(minefield);

@@ -14,20 +14,83 @@
 /*!**********************!*\
   !*** ./src/index.ts ***!
   \**********************/
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconsole.log(\"Hello!\");\n\n\n//# sourceURL=webpack://eecs581-minesweeper/./src/index.ts?");
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _minefield_gen__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./minefield_gen */ \"./src/minefield_gen.ts\");\nconsole.log(\"Hello!\");\n\nconst minefield = (0,_minefield_gen__WEBPACK_IMPORTED_MODULE_0__.generateMinefield)({ row: 3, col: 5 }, 10, 10, 1, 10);\nconsole.table(minefield);\n\n\n//# sourceURL=webpack://eecs581-minesweeper/./src/index.ts?\n}");
+
+/***/ }),
+
+/***/ "./src/minefield_gen.ts":
+/*!******************************!*\
+  !*** ./src/minefield_gen.ts ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   generateMinefield: () => (/* binding */ generateMinefield)\n/* harmony export */ });\n/**\n@param rows - # of rows in the minefield\n@param cols- # of columns in the minefield\n@param mineCount- # of mines to place in minefield\n@param Fclick - first click coordinates\n@returns 2D array that represents a generated minefield\n*/\nfunction generateMinefield(Fclick, rows, cols, safeZone = 0, mineCount) {\n    // Initialize empty minefield\n    const minefield = Array.from({ length: rows }, () => Array(cols).fill(0));\n    // Creates safe zone around first click\n    const safeZoneArea = new Set();\n    const startRow = Math.max(0, Fclick.row - safeZone);\n    const endRow = Math.min(rows - 1, Fclick.row + safeZone);\n    const startCol = Math.max(0, Fclick.col - safeZone);\n    const endCol = Math.min(cols - 1, Fclick.col + safeZone);\n    for (let r = startRow; r <= endRow; r++) {\n        for (let c = startCol; c <= endCol; c++) {\n            safeZoneArea.add(`${r},${c}`);\n        }\n        // end of safe zone creation\n        let placedMines = 0;\n        // randomly places mines in minefield\n        while (placedMines < mineCount) {\n            const row = Math.floor(Math.random() * rows);\n            const col = Math.floor(Math.random() * cols);\n            if (safeZoneArea.has(`${row},${col}`) || minefield[row][col] === 1) {\n                continue;\n            }\n            minefield[row][col] = 1;\n            placedMines++;\n        }\n        minefield[Fclick.row][Fclick.col] = 2; // mark first click position\n        return minefield;\n    }\n    // Fallback return in case the above code path is not taken\n    return Array.from({ length: rows }, () => Array(cols).fill(0));\n}\n\n\n//# sourceURL=webpack://eecs581-minesweeper/./src/minefield_gen.ts?\n}");
 
 /***/ })
 
 /******/ 	});
 /************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
 /******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = {};
-/******/ 	__webpack_modules__["./src/index.ts"](0, __webpack_exports__);
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/index.ts");
 /******/ 	
 /******/ })()
 ;

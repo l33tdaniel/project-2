@@ -1,3 +1,17 @@
+
+document.addEventListener("DOMContentLoaded", function() {
+  const gridTiles = document.getElementsByClassName("grid-tile");
+  for (let i = 0; i < gridTiles.length; i++) {
+    gridTiles[i].addEventListener("click", function() {
+      console.log(`Tile (${i % 10}, ${Math.floor(i / 10)}) clicked!`);
+    });
+    gridTiles[i].addEventListener("contextmenu", function(event) {
+      event.preventDefault();
+      console.log(`Tile (${i % 10}, ${Math.floor(i / 10)}) right-clicked!`);
+      gridTiles[i].innerHTML = "🚩";
+    });
+  }
+});
 /*
  * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
  * This devtool is neither made for production nor for readable output files.

@@ -1,3 +1,27 @@
+const flaggedTiles = [];
+document.addEventListener("DOMContentLoaded", function() {
+  const gridTiles = document.getElementsByClassName("grid-tile");
+  for (let i = 0; i < gridTiles.length; i++) {
+    gridTiles[i].addEventListener("click", function() {
+      if (!flaggedTiles.includes([i % 10, Math.floor(i / 10)])) {
+        console.log(`Tile (${i % 10}, ${Math.floor(i / 10)}) clicked!`);
+      } else {
+        console.log(`Tile (${i % 10}, ${Math.floor(i / 10)}) is already flagged.`);
+      }
+    });
+    gridTiles[i].addEventListener("contextmenu", function(event) {
+      event.preventDefault();
+      if (flaggedTiles.includes([i % 10, Math.floor(i / 10)])) {
+        console.log(`Tile (${i % 10}, ${Math.floor(i / 10)}) right-clicked!`);
+        gridTiles[i].innerHTML = "";
+      } else {
+        gridTiles[i].innerHTML = "🚩";
+        flaggedTiles.push([i % 10, Math.floor(i / 10)]);
+      }
+      console.log(`Flagged Tiles: ${flaggedTiles.map(tile => `(${tile[0]}, ${tile[1]})`).join(", ")}`);
+    });
+  }
+});
 /*
  * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
  * This devtool is neither made for production nor for readable output files.

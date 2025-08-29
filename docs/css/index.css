@@ -1,0 +1,30 @@
+/*
+Color guide: 
+unclicked tiles: #999
+activated tiles: #ccc
+hovered tiles: #777
+*/
+
+div.grid-tile {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    box-sizing: border-box;
+    border: 1px #aaa solid;
+    background-color: #999;
+}
+div.grid-tile:hover {
+    background-color: #777;
+}
+div.grid-tile.activated {
+    background-color: #ccc;
+}
+div.grid-row {
+    width: fit-content;
+    display: flex;
+    flex-flow: row;
+}
+div#grid {
+    width: fit-content;
+    border: 2px black solid;
+}

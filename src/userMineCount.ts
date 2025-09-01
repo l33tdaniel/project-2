@@ -29,7 +29,7 @@ export function getMineCount(countSet: (mineCount: number) => void) {
         }
         updateDisplay();
         countSet(mineCount);
-
+        minesRemaining = mineCount;
         console.log(`Mine count set: ${mineCount}`);
     })
 }
@@ -40,7 +40,7 @@ export function getMineCount(countSet: (mineCount: number) => void) {
  */
 
 export function getMinesRemaining(): number {
-    return mineCount;
+    return minesRemaining;
 }
 
 /**

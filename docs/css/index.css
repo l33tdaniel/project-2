@@ -1,22 +1,25 @@
 /*
 Color guide: 
 unclicked tiles: #999
-activated tiles: #ccc
+revealed tiles: #ccc
 hovered tiles: #777
 */
 
 div.grid-tile {
     width: 50px;
     height: 50px;
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     box-sizing: border-box;
     border: 1px #aaa solid;
     background-color: #999;
+    font-size: 24px;
 }
 div.grid-tile:hover {
     background-color: #777;
 }
-div.grid-tile.activated {
+div.grid-tile.revealed {
     background-color: #ccc;
 }
 div.grid-row {

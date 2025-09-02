@@ -44,7 +44,7 @@ function firstClickHandler(event: MouseEvent) {
     // Generate minefield with safe zone around first click
     minefield = generateMinefield({ row, col }, rows, cols, 1, mineCount) // safeZone is set to radius 1 (so 3x3 area is safe)
     revealCell(row, col); // reveal the clicked cell
-
+    console.table(minefield); // for debugging
     // Listen for subsequent clicks
     const container = document.getElementById("grid")!;
     container.addEventListener("click", normalClickHandler);

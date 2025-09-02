@@ -3,14 +3,36 @@ import { generateMinefield } from "./minefield_gen";
 let minefield: number[][] | null = null; // Initialize minefield as null (minefield starts empty)
 const rows = 10;
 const cols = 10;
-const mineCount = 10; // hardcoded 
+const mineCount = 10; // hardcoded
 
 export function startGame() {
     // Wait for the first click to generate minefield
     console.log("startGame called");
+
+    const gameover = document.getElementById("gameover"); // set gameover back to hidden
+    gameover != null ? gameover.style.visibility = 'hidden' : null;
+
     const container = document.getElementById("grid")!;
     console.log(container); // should not be null
     container.addEventListener("click", firstClickHandler, { once: true }); // runs firstClickHandler when user clicks the container grid
+
+    const rstbtn = document.getElementById('reset') as HTMLButtonElement;
+    rstbtn.onclick = function() {
+        console.log('Game reset');
+        // need to reset board back to beginning first...
+        const tiles = document.getElementsByClassName('grid-tile');
+        for(let i = 0; i < tiles.length; i++) {
+            const tile = tiles[i];
+            tile?.classList.remove('revealed',);
+            tile != null ? tile.textContent = '': null;
+        }
+
+        minefield = null;
+        startGame(); // reset board
+        
+        const grid = document.getElementById('grid');
+        grid?.classList.remove('grid-disabled',); // re-enable grid
+    };
 }
 
 function firstClickHandler(event: MouseEvent) {
@@ -50,7 +72,14 @@ function revealCell(row: number, col: number) {
     if (value === 1) {
         cell.textContent = "💣"; // Display mine
         cell.classList.add("revealed"); // Mark cell as revealed
-        alert("Game Over! You clicked on a mine.");
+
+        const grid = document.getElementById('grid');
+        grid?.classList.add('grid-disabled',);
+
+        const gameover = document.getElementById('gameover');
+        gameover != null ? gameover.style.visibility = 'visible' : null;
+
+
         return;
     }
 

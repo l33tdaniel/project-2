@@ -32,7 +32,7 @@ export function generateMinefield(
 
         let placedMines = 0;
         // randomly places mines in minefield
-        while (placedMines < mineCount) {
+        while (placedMines <= mineCount) {
             const row = Math.floor(Math.random() * rows);
             const col = Math.floor(Math.random() * cols);
 

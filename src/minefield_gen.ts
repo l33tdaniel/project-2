@@ -28,11 +28,12 @@ export function generateMinefield(
             for (let c = startCol; c <= endCol; c++) {
                 safeZoneArea.add(`${r},${c}`);
             }
+        }
         // end of safe zone creation
 
         let placedMines = 0;
         // randomly places mines in minefield
-        while (placedMines <= mineCount) {
+        while (placedMines < mineCount) {
             const row = Math.floor(Math.random() * rows);
             const col = Math.floor(Math.random() * cols);
 
@@ -46,7 +47,7 @@ export function generateMinefield(
         minefield[Fclick.row]![Fclick.col] = 2; // mark first click position
 
             return minefield;
-        }
+        
     
         // Fallback return in case the above code path is not taken
         return Array.from({ length: rows }, () => Array(cols).fill(0));

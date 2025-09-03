@@ -12,7 +12,13 @@ export const fillGrid = (grid: HTMLDivElement): GridTile[][] => {
             currentTile.id = `grid-tile-${row}-${col}`;
             currentTile.classList.add("grid-tile", `grid-tile-row-${row}`, `grid-tile-col-${col}`);
             currentRow.appendChild(currentTile);
-            gridArr[row-1]![col-1] = {row: row, col: col, element: currentTile};
+            gridArr[row-1]![col-1] = {
+                row: row,
+                col: col,
+                element: currentTile,
+                flagged: false,
+                clicked: false
+            };
         }
     }
     return gridArr;

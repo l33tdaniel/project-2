@@ -2,6 +2,6 @@ export type GridTile = {
     row: Number,
     col: Number,
     element: HTMLDivElement
-    flagged?: boolean,
-    clicked?: boolean
+    flagged: boolean,
+    clicked: boolean
 };

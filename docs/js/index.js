@@ -10,13 +10,23 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/create_grid.ts":
+/*!****************************!*\
+  !*** ./src/create_grid.ts ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"fillGrid\": () => (/* binding */ fillGrid)\n/* harmony export */ });\nconst fillGrid = (grid) => {\n    let gridArr = Array(10).fill(0).map(e => []);\n    for (let row = 1; row <= 10; row++) {\n        const currentRow = document.createElement(\"div\");\n        currentRow.id = `grid-row-${row}`;\n        currentRow.classList.add(\"grid-row\");\n        grid.appendChild(currentRow);\n        for (let col = 1; col <= 10; col++) {\n            const currentTile = document.createElement(\"div\");\n            currentTile.id = `grid-tile-${row}-${col}`;\n            currentTile.classList.add(\"grid-tile\", `grid-tile-row-${row}`, `grid-tile-col-${col}`);\n            currentRow.appendChild(currentTile);\n            gridArr[row - 1][col - 1] = { row: row, col: col, element: currentTile };\n        }\n    }\n    return gridArr;\n};\n\n\n//# sourceURL=webpack://eecs581-minesweeper/./src/create_grid.ts?");
+
+/***/ }),
+
 /***/ "./src/index.ts":
 /*!**********************!*\
   !*** ./src/index.ts ***!
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _minefield_gen__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./minefield_gen */ \"./src/minefield_gen.ts\");\n/* harmony import */ var _reveal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./reveal */ \"./src/reveal.ts\");\nconsole.log(\"Hello!\");\n\n\nwindow.addEventListener(\"DOMContentLoaded\", () => {\n    (0,_reveal__WEBPACK_IMPORTED_MODULE_1__.startGame)();\n});\n//const minefield = generateMinefield({ row: 3, col: 5 }, 10, 10, 1, 10);\n//console.table(minefield);\n\n\n//# sourceURL=webpack://eecs581-minesweeper/./src/index.ts?\n}");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _create_grid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./create_grid */ \"./src/create_grid.ts\");\n/* harmony import */ var _minefield_gen__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./minefield_gen */ \"./src/minefield_gen.ts\");\n/* harmony import */ var _reveal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./reveal */ \"./src/reveal.ts\");\nconsole.log(\"Hello!\");\n\n\n\nwindow.onload = () => {\n    const gridEle = document.querySelector(\"div#grid\");\n    const tileMatrix = (0,_create_grid__WEBPACK_IMPORTED_MODULE_0__.fillGrid)(gridEle);\n    (0,_reveal__WEBPACK_IMPORTED_MODULE_2__.startGame)();\n};\nconst minefield = (0,_minefield_gen__WEBPACK_IMPORTED_MODULE_1__.generateMinefield)({ row: 3, col: 5 }, 10, 10, 1, 10);\nconsole.table(minefield);\n\n\n//# sourceURL=webpack://eecs581-minesweeper/./src/index.ts?");
 
 /***/ }),
 

@@ -1,5 +1,7 @@
 console.log("Hello!");
 
+import "../css/index.css"
+
 import { fillGrid } from "./create_grid";
 import { setFlaggingHandlers } from "./flagging";
 import { generateMinefield } from "./minefield_gen";

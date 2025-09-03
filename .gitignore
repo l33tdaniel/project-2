@@ -9,6 +9,3 @@ node_modules/
 .idea/
 .vscode/
 *.suo
-
-/docs/js/*.ts
-/docs/js/*.map

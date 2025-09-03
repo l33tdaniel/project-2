@@ -1,12 +1,14 @@
 console.log("Hello!");
 
 import { fillGrid } from "./create_grid";
+import { setFlaggingHandlers } from "./flagging";
 import { generateMinefield } from "./minefield_gen";
 import { startGame } from "./reveal";
 
 window.onload = () => {
-    const gridEle: HTMLDivElement = document.querySelector("div#grid")!;
-    const tileMatrix = fillGrid(gridEle);
+    const grid: HTMLDivElement = document.querySelector("div#grid")!;
+    const tileMatrix = fillGrid(grid);
+    setFlaggingHandlers(tileMatrix);
     startGame();
 };
 

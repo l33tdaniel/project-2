@@ -79,6 +79,12 @@ function revealCell(row: number, col: number) {
         const gameover = document.getElementById('gameover');
         gameover != null ? gameover.style.visibility = 'visible' : null;
 
+        const tiles = document.getElementsByClassName('grid-tile');
+        for (const tile of tiles) {
+            const {row, col} = getCellCoordinates(tile as HTMLElement)
+            const tileValue = minefield[row]![col]!;
+            tileValue === 1 ? tile.textContent = "💣": null;
+        }
 
         return;
     }

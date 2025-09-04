@@ -1,6 +1,6 @@
 // get user specified mine count for minefield
 let mineCount: number = 10;
-let minesRemaining: number = 10;
+let flagsRemaining: number = 10;
 /**
  * 
  * @param countSet - callback function called after minecount is entered by user
@@ -8,7 +8,7 @@ let minesRemaining: number = 10;
  */
 
 // get mine count from user req. 10 - 20
-export function getMineCount(countSet: (mineCount: number) => void) {
+export function setMineCount() {
     const countInput = document.getElementById('mineCount') as HTMLInputElement;
     const setMineCountBtn = document.getElementById('setMineCountBtn')as HTMLButtonElement;
 
@@ -28,19 +28,26 @@ export function getMineCount(countSet: (mineCount: number) => void) {
             return;
         }
         updateDisplay();
-        countSet(mineCount);
-        minesRemaining = mineCount;
+        flagsRemaining = mineCount;
         console.log(`Mine count set: ${mineCount}`);
+        return mineCount;
     })
 }
 
 /**
  * 
- * @returns current mine count
+ * @returns remaining flag count
  */
 
-export function getMinesRemaining(): number {
-    return minesRemaining;
+export function getFlagsRemaining(): number {
+    return flagsRemaining;
+}
+/**
+ * 
+ * @returns total mines in grid
+ */
+export function getMineCount(): number {
+    return mineCount;
 }
 
 /**
@@ -49,7 +56,7 @@ export function getMinesRemaining(): number {
  */
 
 export function updateRemaining(change: number): void {
-    minesRemaining += change;
+    flagsRemaining += change;
     updateDisplay();
 }
 
@@ -59,7 +66,7 @@ export function updateRemaining(change: number): void {
 export function updateDisplay(): void {
     const mineDisplay = document.getElementById('minesRemaining');
     if (mineDisplay) {
-        mineDisplay.textContent = minesRemaining.toString();
+        mineDisplay.textContent = flagsRemaining.toString();
         console.log(`Count updated.`);
     }
 }

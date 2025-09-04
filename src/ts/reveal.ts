@@ -1,4 +1,5 @@
 import { generateMinefield } from "./minefield_gen";
+import { getMineCount } from "./userMineCount";
 
 let minefield: number[][] | null = null; // Initialize minefield as null (minefield starts empty)
 const rows = 10;
@@ -41,6 +42,8 @@ function firstClickHandler(event: MouseEvent) {
     if (!target.classList.contains("grid-tile")) return; // if the clicked element is not a grid tile, exit
 
     const { row, col } = getCellCoordinates(target); // get the row and column indices of the clicked tile
+    // Get user inputted mine count
+    const mineCount = getMineCount();
     // Generate minefield with safe zone around first click
     minefield = generateMinefield({ row, col }, rows, cols, 1, mineCount) // safeZone is set to radius 1 (so 3x3 area is safe)
     revealCell(row, col); // reveal the clicked cell

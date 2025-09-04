@@ -8,12 +8,21 @@
 </head>
 <body>
 <div class="wrapper">
+
     <div id="gameover">
         Game Over
         <button id="reset">Reset?</button>
+    </div>    
+    <div id="mineCounter">
+        <strong>Flags Remaining: <span id="minesRemaining">--</span></strong>
     </div>
     <div id="grid">
         <!-- gets filled by create_grid.ts -->
+    </div>
+    <div>
+        <label for="mineCount">Number of mines (10-20):</label>
+        <input type="number" id="mineCount" name="mineCount" min="10" max="20">
+        <button id="setMineCountBtn">Set Mine Count</button>
     </div>
 </div>
 </body>

@@ -6,11 +6,13 @@ import { fillGrid } from "./create_grid";
 import { setFlaggingHandlers } from "./flagging";
 import { generateMinefield } from "./minefield_gen";
 import { startGame } from "./reveal";
+import { setMineCount } from "./userMineCount";
 
 window.onload = () => {
     const grid: HTMLDivElement = document.querySelector("div#grid")!;
     const tileMatrix = fillGrid(grid);
     setFlaggingHandlers(tileMatrix);
+    setMineCount();
     startGame();
 };
 

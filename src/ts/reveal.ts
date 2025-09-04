@@ -1,5 +1,5 @@
 import { generateMinefield } from "./minefield_gen";
-import { getMineCount } from "./userMineCount";
+import { getMineCount, setMineCount } from "./userMineCount";
 
 let minefield: number[][] | null = null; // Initialize minefield as null (minefield starts empty)
 const rows = 10;
@@ -16,7 +16,7 @@ export function startGame() {
     const container = document.getElementById("grid")!;
     console.log(container); // should not be null
     container.addEventListener("click", firstClickHandler, { once: true }); // runs firstClickHandler when user clicks the container grid
-
+    setMineCount();
     const rstbtn = document.getElementById('reset') as HTMLButtonElement;
     rstbtn.onclick = function() {
         console.log('Game reset');

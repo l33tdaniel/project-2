@@ -1,6 +1,6 @@
 // get user specified mine count for minefield
-let mineCount: number = 10;
-let flagsRemaining: number = 10;
+let mineCount: number;
+let flagsRemaining: number;
 /**
  * 
  * @param countSet - callback function called after minecount is entered by user
@@ -10,7 +10,7 @@ let flagsRemaining: number = 10;
 // get mine count from user req. 10 - 20
 export function setMineCount() {
     const countInput = document.getElementById('mineCount') as HTMLInputElement;
-    const setMineCountBtn = document.getElementById('setMineCountBtn')as HTMLButtonElement;
+    const setMineCountBtn = document.getElementById('setMineCountBtn') as HTMLButtonElement;
 
     // error handling null inputs
     if (!setMineCountBtn || !countInput) {
@@ -27,11 +27,17 @@ export function setMineCount() {
             countInput.focus();
             return;
         }
-        updateDisplay();
         flagsRemaining = mineCount;
+        updateDisplay();
         console.log(`Mine count set: ${mineCount}`);
         return mineCount;
     })
+
+    if (mineCount && mineCount >= 10 && mineCount <= 20) {
+        flagsRemaining = mineCount;
+        console.log('Reset counts');
+        updateDisplay();
+    }
 }
 
 /**
@@ -50,6 +56,7 @@ export function getMineCount(): number {
     return mineCount;
 }
 
+
 /**
  * 
  * @param change - +1 when user removes a flag, -1 when user adds a flag
@@ -67,7 +74,7 @@ export function updateDisplay(): void {
     const mineDisplay = document.getElementById('minesRemaining');
     if (mineDisplay) {
         mineDisplay.textContent = flagsRemaining.toString();
-        console.log(`Count updated.`);
+        console.log(`Count updated: ${flagsRemaining}`);
     }
 }
 
@@ -78,6 +85,13 @@ document.addEventListener('flagPlaced', (event: Event) => {
     const customEvent = event as CustomEvent<{ change: number }>;
     updateRemaining(customEvent.detail.change);
 });
+
+const rstbtn = document.getElementById('reset') as HTMLButtonElement;
+rstbtn.addEventListener('click', () => {
+    flagsRemaining = NaN;
+    mineCount = NaN;    
+    updateDisplay();    
+})
 
 // for flag handling file*
 /*

@@ -70,3 +70,6 @@ div#grid {
     width: fit-content;
     border: 2px black solid;
 }
+div#mineCounter {
+    font-weight: bold;
+}

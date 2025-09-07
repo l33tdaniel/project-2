@@ -8,7 +8,7 @@ let flagsRemaining: number;
  */
 
 // get mine count from user req. 10 - 20
-export function setMineCount() {
+export function setMineCount(countSet?: () => void) {
     const countInput = document.getElementById('mineCount') as HTMLInputElement;
     const setMineCountBtn = document.getElementById('setMineCountBtn') as HTMLButtonElement;
 
@@ -30,6 +30,7 @@ export function setMineCount() {
         flagsRemaining = mineCount;
         updateDisplay();
         console.log(`Mine count set: ${mineCount}`);
+        if (countSet) countSet();
         return mineCount;
     })
 

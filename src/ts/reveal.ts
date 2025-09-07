@@ -7,16 +7,16 @@ const cols = 10;
 const mineCount = 10; // hardcoded
 
 export function startGame() {
-    // Wait for the first click to generate minefield
+    // Wait for the first click to generate minefield        
     console.log("startGame called");
-
     const gameover = document.getElementById("gameover"); // set gameover back to hidden
     gameover != null ? gameover.style.visibility = 'hidden' : null;
+    setMineCount(() => {
+        const container = document.getElementById("grid")!;
+        console.log(container); // should not be null
+        container.addEventListener("click", firstClickHandler, { once: true }); // runs firstClickHandler when user clicks the container grid
+    });
 
-    const container = document.getElementById("grid")!;
-    console.log(container); // should not be null
-    container.addEventListener("click", firstClickHandler, { once: true }); // runs firstClickHandler when user clicks the container grid
-    setMineCount();
     const rstbtn = document.getElementById('reset') as HTMLButtonElement;
     rstbtn.onclick = function() {
         console.log('Game reset');

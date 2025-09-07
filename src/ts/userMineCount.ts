@@ -19,7 +19,7 @@ export function setMineCount(countSet?: () => void) {
     }
 
     // check user input bounds
-    setMineCountBtn.addEventListener('click', () => {
+    setMineCountBtn.onclick = () => {
         mineCount = parseInt(countInput.value, 10);
         if (isNaN(mineCount) || mineCount < 10 || mineCount > 20) {
             alert('Please enter a number between 10 and 20.');
@@ -32,13 +32,13 @@ export function setMineCount(countSet?: () => void) {
         console.log(`Mine count set: ${mineCount}`);
         if (countSet) countSet();
         return mineCount;
-    })
+    };
 
-    if (mineCount && mineCount >= 10 && mineCount <= 20) {
-        flagsRemaining = mineCount;
-        console.log('Reset counts');
-        updateDisplay();
-    }
+    // if (mineCount && mineCount >= 10 && mineCount <= 20) {
+    //     flagsRemaining = mineCount;
+    //     console.log('Reset counts');
+    //     updateDisplay();
+    // }
 }
 
 /**

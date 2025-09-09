@@ -74,7 +74,11 @@ export function updateRemaining(change: number): void {
 export function updateDisplay(): void {
     const mineDisplay = document.getElementById('minesRemaining');
     if (mineDisplay) {
-        mineDisplay.textContent = flagsRemaining.toString();
+        if (isNaN(flagsRemaining)) {
+            mineDisplay.textContent = '--';
+        } else {
+            mineDisplay.textContent = flagsRemaining.toString();
+        }
         console.log(`Count updated: ${flagsRemaining}`);
     }
 }

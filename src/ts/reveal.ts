@@ -18,8 +18,10 @@ export function startGame() {
     });
 
     const rstbtn = document.getElementById('reset') as HTMLButtonElement;
+    let countInput = document.getElementById('mineCount') as HTMLInputElement;
     rstbtn.onclick = function() {
-        console.log('Game reset');
+        console.log('Game reset');        
+        countInput.value = '';
         // need to reset board back to beginning first...
         const tiles = document.getElementsByClassName('grid-tile');
         for(let i = 0; i < tiles.length; i++) {
@@ -27,7 +29,7 @@ export function startGame() {
             tile?.classList.remove('revealed',);
             tile != null ? tile.textContent = '': null;
         }
-
+        
         minefield = null;
         startGame(); // reset board
         

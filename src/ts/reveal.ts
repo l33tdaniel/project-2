@@ -12,27 +12,33 @@ export function startGame() {
     const gameover = document.getElementById("gameover"); // set gameover back to hidden
     gameover != null ? gameover.style.visibility = 'hidden' : null;
 
+    const victory = document.getElementById("victory"); // set victory back to hidden
+    victory != null ? victory.style.visibility = 'hidden' : null;
+
     const container = document.getElementById("grid")!;
     console.log(container); // should not be null
     container.addEventListener("click", firstClickHandler, { once: true }); // runs firstClickHandler when user clicks the container grid
 
-    const rstbtn = document.getElementById('reset') as HTMLButtonElement;
-    rstbtn.onclick = function() {
-        console.log('Game reset');
-        // need to reset board back to beginning first...
-        const tiles = document.getElementsByClassName('grid-tile');
-        for(let i = 0; i < tiles.length; i++) {
-            const tile = tiles[i];
-            tile?.classList.remove('revealed',);
-            tile != null ? tile.textContent = '': null;
-        }
+    (document.getElementById('reset-gameover') as HTMLButtonElement).onclick = reset;
+    (document.getElementById('reset-victory') as HTMLButtonElement).onclick = reset;
 
-        minefield = null;
-        startGame(); // reset board
-        
-        const grid = document.getElementById('grid');
-        grid?.classList.remove('grid-disabled',); // re-enable grid
-    };
+}
+
+function reset() {
+    console.log('Game reset');
+    // need to reset board back to beginning first...
+    const tiles = document.getElementsByClassName('grid-tile');
+    for(let i = 0; i < tiles.length; i++) {
+        const tile = tiles[i];
+        tile?.classList.remove('revealed',);
+        tile != null ? tile.textContent = '': null;
+    }
+
+    minefield = null;
+    startGame(); // reset board
+    
+    const grid = document.getElementById('grid');
+    grid?.classList.remove('grid-disabled',); // re-enable grid
 }
 
 function firstClickHandler(event: MouseEvent) {
@@ -107,9 +113,35 @@ function revealCell(row: number, col: number) {
                 }
             }
         }
-    }   
+    }
+    
+    // Check for victory after revealing this cell
+    checkVictory();
 }
 
+function checkVictory() {
+    if (!minefield) return; // If minefield is not generated yet, exit
+
+    // iterate over the minefield to check if all non-mine cells have been revealed
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+            const cell = getCellElement(r, c); // get the div element for the cell
+            const value = minefield[r]![c]!; // get the value of the cell in the minefield (0, 1, or 2)
+
+            // if the cell is not a mine (value 0 or 2) and is not revealed, the game is not yet won
+            if (value !== 1 && cell && !cell.classList.contains("revealed")) {
+                return; // exit the function 
+            }
+        }
+    }
+
+    // If all non-mine cells are revealed, player wins
+    const victory = document.getElementById("victory");
+    victory != null ? victory.style.visibility = "visible" : null;
+
+    const grid = document.getElementById("grid");
+    grid?.classList.add("grid-disabled",); // disable further clicks on the grid
+}
 function countAdjacentMines(row: number, col: number): number {
     if (!minefield) return 0; // If minefield is not generated yet, return 0
     let count = 0;

@@ -8,9 +8,13 @@
 </head>
 <body>
 <div class="wrapper">
-    <div id="gameover">
+    <div id="gameover" style="visibility: hidden">
         Game Over
-        <button id="reset">Reset?</button>
+        <button id="reset-gameover">Reset?</button>
+    </div>
+    <div id="victory" style="visibility: hidden">
+        You Win!
+        <button id="reset-victory">Play Again?</button>
     </div>
     <div id="grid">
         <!-- gets filled by create_grid.ts -->

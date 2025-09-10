@@ -1,6 +1,6 @@
 import { generateMinefield } from "./minefield_gen";
 import { getMineCount, setMineCount } from "./userMineCount";
-
+import { showPlayingStatus, hideStatus } from "./status";
 let minefield: number[][] | null = null; // Initialize minefield as null (minefield starts empty)
 const rows = 10;
 const cols = 10;
@@ -12,11 +12,11 @@ export function startGame() {
     const gameover = document.getElementById("gameover"); // set gameover back to hidden
     gameover != null ? gameover.style.visibility = 'hidden' : null;
     setMineCount(() => {
+        showPlayingStatus(); // show status once game starts
         const container = document.getElementById("grid")!;
         console.log(container); // should not be null
         container.addEventListener("click", firstClickHandler, { once: true }); // runs firstClickHandler when user clicks the container grid
     });
-
     const rstbtn = document.getElementById('reset') as HTMLButtonElement;
     let countInput = document.getElementById('mineCount') as HTMLInputElement;
     rstbtn.onclick = function() {
@@ -29,7 +29,7 @@ export function startGame() {
             tile?.classList.remove('revealed',);
             tile != null ? tile.textContent = '': null;
         }
-        
+        hideStatus(); // hide status when resetting game
         minefield = null;
         startGame(); // reset board
         

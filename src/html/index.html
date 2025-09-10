@@ -7,23 +7,46 @@
     <title>Minesweeper - EECS 581 Group 11</title>
 </head>
 <body>
+<nav>
+    <div>
+        <section id="nav-title">Minesweeper</section>
+        <section id="nav-source">
+            <a href="https://github.com/addiebart/eecs581-minesweeper">Source</a>
+        </section>
+        <section id="nav-authors">
+            About
+        </section>
+    </div>
+</nav>
 <div class="wrapper">
     
     <div id="gameover">
         Game Over
         <button id="reset">Reset?</button>
     </div>    
-    <div id="mineCounter">
-        <p>Flags Remaining: <span id="minesRemaining">--</span></p>
+    <section id="mineTextUI">
+        <div id="mineCounter">
+            <p>Flags Remaining: <span id="minesRemaining">--</span></p>     
+        </div>
+        <div>
+            <label for="mineCount">Number of mines (10-20):</label>
+            <input type="number" id="mineCount" name="mineCount" min="10" max="20">
+            <button id="setMineCountBtn">Start Game</button>
+        </div>
+    </section>
+    <div id="statusIndicator" style="display: none;">
+        <p>Status: <span id="statusText"></span></p>
     </div>
+    <div id="grid-headers-wrapper">
+        <div class="grid-header-row" >
+
+        </div>
+        <div class="grid-header-column">
+        </div>
     <div id="grid">
         <!-- gets filled by create_grid.ts -->
     </div>
-    <div>
-        <label for="mineCount">Number of mines (10-20):</label>
-        <input type="number" id="mineCount" name="mineCount" min="10" max="20">
-        <button id="setMineCountBtn">Start Game</button>
-    </div>
+</div>
 </div>
 </body>
 </html>

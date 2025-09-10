@@ -5,13 +5,25 @@ revealed tiles: #ccc
 hovered tiles: #777
 */
 
-body {
+:root, html, body {
     font-family: Arial, Helvetica, sans-serif;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    display: relative;
+    background: #a1a1a1;
+    background: linear-gradient(135deg,rgba(161, 161, 161, 1) 0%, rgba(181, 181, 181, 1) 35%, rgba(186, 186, 186, 1) 59%);
 }
 
 .wrapper {
     width: fit-content;
     position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 95vw;
+    max-height: 95vw;
+    overflow: scroll;
 }
 
 .grid-disabled {
@@ -47,6 +59,7 @@ button#reset {
 div.grid-tile {
     width: 50px;
     height: 50px;
+    flex-grow: 1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -69,7 +82,150 @@ div.grid-row {
 div#grid {
     width: fit-content;
     border: 2px black solid;
+    grid-column: 2 / 3;  /* adjust spacing so that it aligns with headers */
+    grid-row: 2 / 3;    
+    display: flex;
+    flex-direction: column; /*  stack rows vertically  */
 }
+
+#grid-headers-wrapper {
+    display: grid;
+    grid-template-columns: auto 1fr; 
+    grid-template-rows: auto 1fr;   
+    gap: 0; 
+}
+
+div.grid-header-tile {
+    pointer-events: none;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border: 1px #aaa solid;
+    background-color: #ccc;
+    font-size: 24px;
+}
+
+div.grid-header-row{
+    grid-column: 2 / 3; /* adjust spacing so that header  row is aligned at the edges */
+    grid-row: 1 / 2;   
+    display: flex;
+    flex-flow: row;
+    pointer-events: none;
+    width: fit-content;
+}
+
+div.grid-header-column{
+    grid-column: 1 / 2; /* adjust spacing so that header column are aligned at the edges */
+    grid-row: 2 / 3;   
+    display: flex;
+    flex-flow: column;
+    pointer-events: none;
+    height: fit-content;
+}
+
 div#mineCounter {
     font-weight: bold;
+    grid-column: 2 / 3;  /* adjust spacing so that it aligns with headers */
+    grid-row: 2 / 3;    
+    display: flex;
+    flex-direction: column; /*  stack rows vertically  */
+    box-sizing: border-box;
+}
+
+#grid-headers-wrapper {
+    display: grid;
+    grid-template-columns: auto 1fr; 
+    grid-template-rows: auto 1fr;   
+    gap: 0; 
+}
+
+div.grid-header-tile {
+    pointer-events: none;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border: 1px #aaa solid;
+    background-color: #ccc;
+    font-size: 24px;
+}
+
+div.grid-header-row{
+    grid-column: 2 / 3; /* adjust spacing so that header  row is aligned at the edges */
+    grid-row: 1 / 2;   
+    display: flex;
+    flex-flow: row;
+    pointer-events: none;
+    width: fit-content;
+    border: 2px black solid;
+    border-bottom: 0;
+    box-sizing: border-box;
+}
+
+div.grid-header-column{
+    grid-column: 1 / 2; /* adjust spacing so that header column are aligned at the edges */
+    grid-row: 2 / 3;   
+    display: flex;
+    flex-flow: column;
+    pointer-events: none;
+    height: fit-content;
+    border: 2px black solid;
+    border-right: 0;
+    box-sizing: border-box;
+}
+
+nav {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    left: 0;
+    top: 0;
+    height: 40px;
+    width: 100%;
+    background-color: #008080;
+    border-bottom: 1px black solid;
+}
+
+nav * {
+    position: relative;
+}
+
+nav > div {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    max-height: 100%;
+    align-items: center;
+}
+
+nav section {
+    display: inline-block;
+    margin-left: 16px;
+}
+
+nav a {
+    color: currentColor;
+}
+
+nav a:hover {
+    font-style: italic;
+}
+
+#nav-title {
+    font-weight: bold;
+}
+
+#mineTextUI {
+    margin-bottom: 8px;
+}
+
+#nav-authors:hover {
+    font-style: italic;
+    text-decoration: underline;
 }

@@ -1,6 +1,6 @@
 console.log("Hello!");
 
-// import "../css/index.css"
+import "../css/index.css"
 
 import { fillGrid } from "./create_grid";
 import { setFlaggingHandlers } from "./flagging";
@@ -19,6 +19,9 @@ window.onload = () => {
     setFlaggingHandlers(tileMatrix);
     setMineCount();
     startGame();
+
+    const aboutBtn: HTMLElement = document.querySelector("section#nav-authors")!;
+    aboutBtn.onclick = () => alert("This Minesweeper was made by Addison, Anya, Marco, Janna, Elizabeth, and Hunter.");
 };
 
 //const minefield = generateMinefield({ row: 3, col: 5 }, 10, 10, 1, 10);

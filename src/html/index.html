@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow, noarchive">
     <title>Minesweeper - EECS 581 Group 11</title>
-    <link rel="stylesheet" href="../src/css/index.css">
 </head>
 <body>
 <nav>
@@ -15,7 +14,7 @@
             <a href="https://github.com/addiebart/eecs581-minesweeper">Source</a>
         </section>
         <section id="nav-authors">
-            Made by Addison, Anya, Marco, Pashia, Hunter, and Elizabeth.
+            About
         </section>
     </div>
 </nav>
@@ -25,9 +24,16 @@
         Game Over
         <button id="reset">Reset?</button>
     </div>    
-    <div id="mineCounter">
-        <p>Flags Remaining: <span id="minesRemaining">--</span></p>
-    </div>
+    <section id="mineTextUI">
+        <div id="mineCounter">
+            <p>Flags Remaining: <span id="minesRemaining">--</span></p>     
+        </div>
+        <div>
+            <label for="mineCount">Number of mines (10-20):</label>
+            <input type="number" id="mineCount" name="mineCount" min="10" max="20">
+            <button id="setMineCountBtn">Start Game</button>
+        </div>
+    </section>
     <div id="statusIndicator" style="display: none;">
         <p>Status: <span id="statusText"></span></p>
     </div>
@@ -39,11 +45,6 @@
         </div>
     <div id="grid">
         <!-- gets filled by create_grid.ts -->
-    </div>
-    <div>
-        <label for="mineCount">Number of mines (10-20):</label>
-        <input type="number" id="mineCount" name="mineCount" min="10" max="20">
-        <button id="setMineCountBtn">Start Game</button>
     </div>
 </div>
 </div>

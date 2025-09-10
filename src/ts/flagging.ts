@@ -19,7 +19,7 @@ export const setFlaggingHandlers = (tileMatrix: GridTile[][]) => {
         console.log(`Tile (${tile.row},${tile.col}) right-clicked!`);
         tile.element.textContent = "";
         tile.flagged = false;
-        document.dispatchEvent(new CustomEvent('flagPlaced', { detail: { change: 1 } }));
+        document.dispatchEvent(new CustomEvent('flagPlaced', { detail: { change: 1 } })); // send event to userMineCount to update flag count
       } else {
         tile.element.textContent = "🚩";
         tile.flagged = true;

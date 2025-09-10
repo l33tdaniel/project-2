@@ -1,6 +1,7 @@
 // get user specified mine count for minefield
 let mineCount: number;
 let flagsRemaining: number;
+
 /**
  * 
  * @param countSet - callback function called after minecount is entered by user
@@ -21,24 +22,17 @@ export function setMineCount(countSet?: () => void) {
     // check user input bounds
     setMineCountBtn.onclick = () => {
         mineCount = parseInt(countInput.value, 10);
-        if (isNaN(mineCount) || mineCount < 10 || mineCount > 20) {
-            alert('Please enter a number between 10 and 20.');
+        if (isNaN(mineCount) || mineCount < 10 || mineCount > 20) { // if invalid input, alert pops up
+            alert('Please enter an integer between 10 and 20.');
             countInput.value = '';
             countInput.focus();
             return;
         }
-        flagsRemaining = mineCount;
-        updateDisplay();
+        flagsRemaining = mineCount; 
+        updateDisplay(); // show remaining flag count 
         console.log(`Mine count set: ${mineCount}`);
-        if (countSet) countSet();
-        return mineCount;
+        if (countSet) countSet(); // for starting the game once mineCount inputted
     };
-
-    // if (mineCount && mineCount >= 10 && mineCount <= 20) {
-    //     flagsRemaining = mineCount;
-    //     console.log('Reset counts');
-    //     updateDisplay();
-    // }
 }
 
 /**
@@ -74,10 +68,10 @@ export function updateRemaining(change: number): void {
 export function updateDisplay(): void {
     const mineDisplay = document.getElementById('minesRemaining');
     if (mineDisplay) {
-        if (isNaN(flagsRemaining)) {
-            mineDisplay.textContent = '--';
+        if (isNaN(flagsRemaining)) { 
+            mineDisplay.textContent = '--';//if no minecount set yet
         } else {
-            mineDisplay.textContent = flagsRemaining.toString();
+            mineDisplay.textContent = flagsRemaining.toString(); // show flag count
         }
         console.log(`Count updated: ${flagsRemaining}`);
     }
@@ -87,23 +81,16 @@ export function updateDisplay(): void {
  * listen for when flag added/removed
  */
 document.addEventListener('flagPlaced', (event: Event) => {
-    const customEvent = event as CustomEvent<{ change: number }>;
-    updateRemaining(customEvent.detail.change);
+    const customEvent = event as CustomEvent<{ change: number }>; // get flag update from flagging.ts
+    updateRemaining(customEvent.detail.change); // update flag count
 });
 
-const rstbtn = document.getElementById('reset') as HTMLButtonElement;
+/**
+ * listen for game reset
+ */
+const rstbtn = document.getElementById('reset') as HTMLButtonElement; // handle game reset
 rstbtn.addEventListener('click', () => {
-    flagsRemaining = NaN;
+    flagsRemaining = NaN; // reset flag count and mine count on reset
     mineCount = NaN;    
-    updateDisplay();    
+    updateDisplay(); // update the display with reset words
 })
-
-// for flag handling file*
-/*
-if placing a flag 
-{
-    document.dispatchEvent(new CustomEvent('flagPlaced', { detail: { change: -1 } }));
-} else if removing a flag {
-    document.dispatchEvent(new CustomEvent('flagPlaced', { detail: { change: 1 } }));
-}
-*/

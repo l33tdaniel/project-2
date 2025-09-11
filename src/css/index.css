@@ -31,7 +31,7 @@ hovered tiles: #777
     filter: brightness(75%);
 }
 
-div#gameover {
+div#game-message {
     color: white;
     position: absolute;
     top: 50%;

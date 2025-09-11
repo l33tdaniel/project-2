@@ -22,6 +22,11 @@ export function startGame() {
     rstbtn.onclick = function() {
         console.log('Game reset');        
         countInput.value = '';
+        
+        // hide gameover or victory message
+        const msg = document.getElementById("game-message")!;
+        msg.style.visibility = "hidden";
+
         // need to reset board back to beginning first...
         const tiles = document.getElementsByClassName('grid-tile');
         for(let i = 0; i < tiles.length; i++) {
@@ -31,10 +36,11 @@ export function startGame() {
         }
         hideStatus(); // hide status when resetting game
         minefield = null;
-        startGame(); // reset board
+        
         
         const grid = document.getElementById('grid');
         grid?.classList.remove('grid-disabled',); // re-enable grid
+        startGame(); // reset board, which attaches first-click listener again
     };
 }
 
@@ -81,8 +87,13 @@ function revealCell(row: number, col: number) {
         const grid = document.getElementById('grid');
         grid?.classList.add('grid-disabled',);
 
-        const gameover = document.getElementById('gameover');
-        gameover != null ? gameover.style.visibility = 'visible' : null;
+        // Show "Game Over"
+        const msg = document.getElementById("game-message");
+        const msgText = document.getElementById("message-text");
+        if (msg && msgText) {
+            msgText.textContent = "Game Over";
+            msg.style.visibility = "visible";
+        }
 
         const tiles = document.getElementsByClassName('grid-tile');
         for (const tile of tiles) {
@@ -118,7 +129,38 @@ function revealCell(row: number, col: number) {
                 }
             }
         }
-    }   
+    }
+    
+    // Check for victory after revealing this cell
+    checkVictory();
+}
+
+function checkVictory() {
+    if (!minefield) return; // If minefield is not generated yet, exit
+
+    // iterate over the minefield to check if all non-mine cells have been revealed
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+            const cell = getCellElement(r, c); // get the div element for the cell
+            const value = minefield[r]![c]!; // get the value of the cell in the minefield (0, 1, or 2)
+
+            // if the cell is not a mine (value 0 or 2) and is not revealed, the game is not yet won
+            if (value !== 1 && cell && !cell.classList.contains("revealed")) {
+                return; // exit the function 
+            }
+        }
+    }
+
+    // If all non-mine cells are revealed, player wins
+    const msg = document.getElementById("game-message");
+    const msgText = document.getElementById("message-text");
+    if (msg && msgText) {
+        msgText.textContent = "You Win!";
+        msg.style.visibility = "visible";
+    }
+
+    const grid = document.getElementById("grid");
+    grid?.classList.add("grid-disabled",); // disable further clicks on the grid
 }
 
 function countAdjacentMines(row: number, col: number): number {

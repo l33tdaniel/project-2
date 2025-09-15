@@ -1,6 +1,7 @@
 import { generateMinefield } from "./minefield_gen";
 import { getMineCount, setMineCount } from "./userMineCount";
-import { showPlayingStatus, hideStatus } from "./status";
+import { showPlayingStatus, hideStatus } from "./status";import { getFlaggedTiles } from "./flagging";
+
 let minefield: number[][] | null = null; // Initialize minefield as null (minefield starts empty)
 const rows = 10;
 const cols = 10;
@@ -67,6 +68,14 @@ function normalClickHandler(event: MouseEvent) {
     if (!target.classList.contains("grid-tile")) return;
 
     const { row, col } = getCellCoordinates(target);
+
+    const flagged = getFlaggedTiles(row, col);
+    if (flagged !== undefined && flagged > 0) {
+        console.log(`Tile (${row},${col}) is flagged, cannot reveal.`);
+        return
+    }; // If the cell is flagged, do not reveal it
+
+    
     revealCell(row, col);
 }
 

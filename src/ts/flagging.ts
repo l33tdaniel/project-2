@@ -1,5 +1,25 @@
 import type { GridTile } from "./localTypes";
 
+let flaggedTiles: number[][] = [
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+]; // 2D array to track flagged tiles
+
+export const getFlaggedTiles = (row: number, col: number) => {
+  if (!flaggedTiles[row]) {
+    flaggedTiles[row] = [];
+  }
+  return flaggedTiles[row][col];
+}
+
 export const setFlaggingHandlers = (tileMatrix: GridTile[][]) => {
   tileMatrix.flat().forEach(tile => {
     /* 
@@ -20,10 +40,14 @@ export const setFlaggingHandlers = (tileMatrix: GridTile[][]) => {
         tile.element.textContent = "";
         tile.flagged = false;
         document.dispatchEvent(new CustomEvent('flagPlaced', { detail: { change: 1 } })); // send event to userMineCount to update flag count
+        flaggedTiles[Number(tile.row)-1]![Number(tile.col)-1] = 0;
+        console.table(flaggedTiles);
       } else {
         tile.element.textContent = "🚩";
         tile.flagged = true;
         document.dispatchEvent(new CustomEvent('flagPlaced', { detail: { change: -1 } }));
+        flaggedTiles[Number(tile.row)-1]![Number(tile.col)-1] = 1;
+        console.table(flaggedTiles);
       }
     };
   })

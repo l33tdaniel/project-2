@@ -31,6 +31,8 @@ export function setMineCount(countSet?: () => void) {
         flagsRemaining = mineCount; 
         updateDisplay(); // show remaining flag count 
         console.log(`Mine count set: ${mineCount}`);
+        countInput.disabled = true; // disable input box
+        setMineCountBtn.disabled = true; // disable start game button
         if (countSet) countSet(); // for starting the game once mineCount inputted
     };
 }
@@ -93,4 +95,12 @@ rstbtn.addEventListener('click', () => {
     flagsRemaining = NaN; // reset flag count and mine count on reset
     mineCount = NaN;    
     updateDisplay(); // update the display with reset words
+
+    // allow new input for mine count
+    const countInput = document.getElementById('mineCount') as HTMLInputElement;
+    const setMineCountBtn = document.getElementById('setMineCountBtn') as HTMLButtonElement;
+    if (countInput && setMineCountBtn) {
+        countInput.disabled = false; // re-enable input box
+        setMineCountBtn.disabled = false; // re-enable start game button
+    }
 })

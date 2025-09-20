@@ -26,6 +26,8 @@ export const resetFlaggedTiles = () => {
       flaggedTiles[r]![c] = 0;
     }
   }
+  console.log("Flagged tiles reset:");
+  console.table(flaggedTiles);
 }
 
 
@@ -44,7 +46,7 @@ export const setFlaggingHandlers = (tileMatrix: GridTile[][]) => {
     */
     tile.element.oncontextmenu = event => {
       event.preventDefault();
-      if (tile.flagged) {
+      if (flaggedTiles[Number(tile.row)-1]![Number(tile.col)-1] === 1) {
         console.log(`Tile (${tile.row},${tile.col}) right-clicked!`);
         tile.element.textContent = "";
         tile.flagged = false;

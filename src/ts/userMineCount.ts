@@ -97,7 +97,7 @@ rstbtn.addEventListener('click', () => {
     flagsRemaining = NaN; // reset flag count and mine count on reset
     mineCount = NaN;    
     updateDisplay(); // update the display with reset words
-    resetFlaggedTiles
+    resetFlaggedTiles(); // reset flagged tiles array
 
     // allow new input for mine count
     const countInput = document.getElementById('mineCount') as HTMLInputElement;

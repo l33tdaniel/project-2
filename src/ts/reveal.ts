@@ -1,6 +1,6 @@
 import { generateMinefield } from "./minefield_gen";
 import { getMineCount, setMineCount } from "./userMineCount";
-import { showPlayingStatus, hideStatus } from "./status";import { getFlaggedTiles } from "./flagging";
+import { showPlayingStatus, hideStatus } from "./status";import { getFlaggedTiles, resetFlaggedTiles } from "./flagging";
 
 let minefield: number[][] | null = null; // Initialize minefield as null (minefield starts empty)
 const rows = 10;
@@ -20,6 +20,7 @@ export function startGame() {
     });
     const rstbtn = document.getElementById('reset') as HTMLButtonElement;
     let countInput = document.getElementById('mineCount') as HTMLInputElement;
+    resetFlaggedTiles(); // reset flagged tiles 2D array
     rstbtn.onclick = function() {
         console.log('Game reset');        
         countInput.value = '';

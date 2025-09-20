@@ -20,6 +20,15 @@ export const getFlaggedTiles = (row: number, col: number) => {
   return flaggedTiles[row][col];
 }
 
+export const resetFlaggedTiles = () => {
+  for (let r = 0; r < flaggedTiles.length; r++) {
+    for (let c = 0; c < flaggedTiles[r]!.length; c++) {
+      flaggedTiles[r]![c] = 0;
+    }
+  }
+}
+
+
 export const setFlaggingHandlers = (tileMatrix: GridTile[][]) => {
   tileMatrix.flat().forEach(tile => {
     /* 

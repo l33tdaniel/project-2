@@ -1,3 +1,5 @@
+import { resetFlaggedTiles } from "./flagging";
+
 // get user specified mine count for minefield
 let mineCount: number;
 let flagsRemaining: number;
@@ -95,6 +97,7 @@ rstbtn.addEventListener('click', () => {
     flagsRemaining = NaN; // reset flag count and mine count on reset
     mineCount = NaN;    
     updateDisplay(); // update the display with reset words
+    resetFlaggedTiles
 
     // allow new input for mine count
     const countInput = document.getElementById('mineCount') as HTMLInputElement;

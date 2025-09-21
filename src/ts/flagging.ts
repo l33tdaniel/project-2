@@ -33,29 +33,16 @@ export const resetFlaggedTiles = () => {
 
 export const setFlaggingHandlers = (tileMatrix: GridTile[][]) => {
   tileMatrix.flat().forEach(tile => {
-    /* 
-    // Handeled by reveal.ts?
-
-    tile.element.onclick = () => {
-      if (!tile.flagged) {
-        console.log(`Tile (${tile.row},${tile.col}) clicked!`);
-      } else {
-        console.log(`Tile (${tile.row},${tile.col}) is already flagged.`);
-      }
-    };
-    */
     tile.element.oncontextmenu = event => {
       event.preventDefault();
       if (flaggedTiles[Number(tile.row)-1]![Number(tile.col)-1] === 1) {
         console.log(`Tile (${tile.row},${tile.col}) right-clicked!`);
         tile.element.textContent = "";
-        tile.flagged = false;
         document.dispatchEvent(new CustomEvent('flagPlaced', { detail: { change: 1 } })); // send event to userMineCount to update flag count
         flaggedTiles[Number(tile.row)-1]![Number(tile.col)-1] = 0;
         console.table(flaggedTiles);
-      } else {
+      } else if (!tile.element.classList.contains("revealed")) {
         tile.element.textContent = "🚩";
-        tile.flagged = true;
         document.dispatchEvent(new CustomEvent('flagPlaced', { detail: { change: -1 } }));
         flaggedTiles[Number(tile.row)-1]![Number(tile.col)-1] = 1;
         console.table(flaggedTiles);

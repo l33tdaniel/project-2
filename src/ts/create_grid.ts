@@ -15,9 +15,7 @@ export const fillGrid = (grid: HTMLDivElement,rows: number, cols:number): GridTi
             gridArr[row-1]![col-1] = {
                 row: row,
                 col: col,
-                element: currentTile,
-                flagged: false,
-                clicked: false
+                element: currentTile
             };
         }
     }

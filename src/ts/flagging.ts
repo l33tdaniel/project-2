@@ -1,4 +1,5 @@
 import type { GridTile } from "./localTypes";
+import { getMineCount } from "./userMineCount"; // import to check if mine count is set
 
 let flaggedTiles: number[][] = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -35,6 +36,13 @@ export const setFlaggingHandlers = (tileMatrix: GridTile[][]) => {
   tileMatrix.flat().forEach(tile => { // for every tile
     tile.element.oncontextmenu = event => { // set right click behavior
       event.preventDefault(); // prevent contextmenu
+      
+      // only allow flagging if mineCount is set
+      if (isNaN(getMineCount())) {
+        console.log("Cannot flag yet, mine count not set.");
+        return;
+      }
+
       if (flaggedTiles[Number(tile.row)-1]![Number(tile.col)-1] === 1) { // if flagged
         console.log(`Tile (${tile.row},${tile.col}) right-clicked!`);
         tile.element.textContent = ""; // remove marker

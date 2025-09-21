@@ -14,7 +14,7 @@ window.onload = () => {
     const gridheaders = addLabels(rows, cols); // add labels to grid
 
     setFlaggingHandlers(tileMatrix); // set event handlers for right-click
-    setMineCount(); // initilize the minecounter
+    setMineCount(); // initialize the minecounter
     startGame(); // start the main game
 
     const aboutBtn: HTMLElement = document.querySelector("section#nav-authors>a")!; // get the about button

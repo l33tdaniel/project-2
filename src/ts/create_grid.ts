@@ -1,25 +1,25 @@
 import type { GridTile } from "./localTypes";
 
-export const fillGrid = (grid: HTMLDivElement,rows: number, cols:number): GridTile[][] => {
-    let gridArr: GridTile[][] = Array(10).fill(0).map(e => []);
-    for(let row = 1; row <= rows; row++) {
-        const currentRow = document.createElement("div");
-        currentRow.id = `grid-row-${row}`;
-        currentRow.classList.add("grid-row");
-        grid.appendChild(currentRow);
-        for(let col = 1; col <= cols; col++) {
-            const currentTile = document.createElement("div");
-            currentTile.id = `grid-tile-${row}-${col}`;
-            currentTile.classList.add("grid-tile", `grid-tile-row-${row}`, `grid-tile-col-${col}`);
-            currentRow.appendChild(currentTile);
-            gridArr[row-1]![col-1] = {
+export const fillGrid = (grid: HTMLDivElement, rows: number, cols:number): GridTile[][] => {
+    let tileMatrix: GridTile[][] = Array(10).fill(0).map(e => []); // make an array of 10 empty arrays
+    for(let row = 1; row <= rows; row++) {  // iterate over row indicies
+        const currentRow = document.createElement("div"); // make a div for the row
+        currentRow.id = `grid-row-${row}`; // set id
+        currentRow.classList.add("grid-row"); // set classes
+        grid.appendChild(currentRow); // add to dom
+        for(let col = 1; col <= cols; col++) { // for each col index
+            const currentTile = document.createElement("div"); // make div for tile at x,y
+            currentTile.id = `grid-tile-${row}-${col}`; // set id
+            currentTile.classList.add("grid-tile", `grid-tile-row-${row}`, `grid-tile-col-${col}`); // set classes
+            currentRow.appendChild(currentTile); // add to dom
+            tileMatrix[row-1]![col-1] = { // update tilematrix
                 row: row,
                 col: col,
                 element: currentTile
             };
         }
     }
-    return gridArr;
+    return tileMatrix;
 }
 
 // helper funciton to generate a-z aa-zz, etch labels for columns

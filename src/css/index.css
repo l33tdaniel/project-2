@@ -211,10 +211,12 @@ nav section {
 
 nav a {
     color: currentColor;
+    text-decoration: none;
 }
 
 nav a:hover {
-    font-style: italic;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 #nav-title {
@@ -223,9 +225,4 @@ nav a:hover {
 
 #mineTextUI {
     margin-bottom: 8px;
-}
-
-#nav-authors:hover {
-    font-style: italic;
-    text-decoration: underline;
 }

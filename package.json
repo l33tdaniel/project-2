@@ -1,6 +1,6 @@
 {
   "name": "eecs581-minesweeper",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "A game of minesweeper in js/html for eecs581 at KU",
   "main": "index.js",
   "directories": {

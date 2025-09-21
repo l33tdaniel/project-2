@@ -52,23 +52,27 @@ function firstClickHandler(event: MouseEvent) {
     if (!target.classList.contains("grid-tile")) return; // if the clicked element is not a grid tile, exit
 
     const { row, col } = getCellCoordinates(target); // get the row and column indices of the clicked tile
+    const flagged = getFlaggedTiles(row, col); // get the flagged ststus of the tile
+    const container = document.getElementById("grid")!; // get the outer grid
+    if (flagged !== undefined && flagged > 0) { // if tile flagged
+        console.log(`Tile (${row},${col}) is flagged, cannot reveal.`);
+        container.addEventListener("click", firstClickHandler, { once: true }); // reapply first click listener
+        return
+    }; // If the cell is flagged, do not reveal it
     // Get user inputted mine count
     const mineCount = getMineCount();
     // Generate minefield with safe zone around first click
     minefield = generateMinefield({ row, col }, rows, cols, 1, mineCount) // safeZone is set to radius 1 (so 3x3 area is safe)
     revealCell(row, col); // reveal the clicked cell
-    console.table(minefield); // for debugging
-    // Listen for subsequent clicks
-    const container = document.getElementById("grid")!;
-    container.addEventListener("click", normalClickHandler);
+    container.addEventListener("click", normalClickHandler); // Listen for subsequent clicks
 }
 
 function normalClickHandler(event: MouseEvent) {
-    const target = event.target as HTMLElement;
+    const target = event.target as HTMLElement; // determine elememt clicked
 
-    if (!target.classList.contains("grid-tile")) return;
+    if (!target.classList.contains("grid-tile")) return; // ensure element is a gridtile
 
-    const { row, col } = getCellCoordinates(target);
+    const { row, col } = getCellCoordinates(target); // get x,y of gridtile
 
     const flagged = getFlaggedTiles(row, col);
     if (flagged !== undefined && flagged > 0) {
@@ -77,7 +81,7 @@ function normalClickHandler(event: MouseEvent) {
     }; // If the cell is flagged, do not reveal it
 
     
-    revealCell(row, col);
+    revealCell(row, col); // reveal tile
 }
 
 // Reveal a cell and apply flood-fill if needed
@@ -94,7 +98,7 @@ function revealCell(row: number, col: number) {
         cell.textContent = "💣"; // Display mine
         cell.classList.add("revealed"); // Mark cell as revealed
 
-        const grid = document.getElementById('grid');
+        const grid = document.getElementById('grid'); // get outer grid
         grid?.classList.add('grid-disabled',);
 
         // Show "Game Over"
@@ -105,6 +109,7 @@ function revealCell(row: number, col: number) {
             msg.style.visibility = "visible";
         }
 
+        // show mines
         const tiles = document.getElementsByClassName('grid-tile');
         for (const tile of tiles) {
             const {row, col} = getCellCoordinates(tile as HTMLElement)

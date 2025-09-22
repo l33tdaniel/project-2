@@ -1,8 +1,15 @@
 /*
-Color guide: 
-unclicked tiles: #999
-revealed tiles: #ccc
-hovered tiles: #777
+File: index.css
+Authors: Addison Bartelli, Janna Dungao, Marco Martinez, Elizabeth Miller
+Creation Date: August 28, 2025
+Description: CSS styling for Minesweeper.
+
+Color Guide:
+- Unclicked tiles: #999
+- Revealed tiles: #ccc
+- Hovered tiles: #777
+
+External Sources: None
 */
 
 :root, html, body {

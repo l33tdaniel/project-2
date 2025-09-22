@@ -2,7 +2,9 @@
 
 ## About
 
-This Minesweeper project was created for EECS 581 - Software Engineering II at the University of Kansas by Addison, Anya, Marco, Hunter, Elizabeth, and Janna. \
+This Minesweeper project was created for EECS 581 - Software Engineering II at the University of Kansas \
+Creaded by Addison, Anya, Marco, Hunter, Elizabeth, and Janna. 👾 \
+TypeScript and Webpack are the primary technologies used in this project. \
 This project was completed over the course of three 1-week sprints using Agile methodology. \
 More documentation about the program can be found in [/planning-documents](planning-documents).
 

@@ -1,16 +1,45 @@
+/*
+File: userMineCount.ts
+Authors: Janna Dungao, Hunter Long
+Creation Date: August 30, 2025
+Description: Manages user-specified mine count and tracks remaining flags in the Minesweeper game.
+
+Functions:
+1. setMineCount(): Reads user input for mine count (10–20) and initializes remaining flags.
+   - Input: Optional callback called after valid mine count is set.
+   - Output: Updates internal state and DOM.
+
+2. getMineCount(): Returns the total number of mines set by the user.
+   - Input: None
+   - Output: Number of mines.
+
+3. getFlagsRemaining(): Returns the number of flags left for the user.
+   - Input: None
+   - Output: Number of flags remaining.
+
+4. updateRemaining(change): Updates the remaining flags count based on flag addition/removal.
+   - Input: change (+1 or -1)
+   - Output: Updates DOM.
+
+5. updateDisplay(): Updates the displayed remaining flags count in the DOM.
+   - Input: None
+   - Output: Updates DOM.
+
+External Sources: GitHub Copilot
+*/
 import { resetFlaggedTiles } from "./flagging";
 
 // get user specified mine count for minefield
-let mineCount: number;
-let flagsRemaining: number;
+let mineCount: number; // total mines in game
+let flagsRemaining: number; // flags left for user
+
 
 /**
- * 
- * @param countSet - callback function called after minecount is entered by user
- * @returns void
+ * setMineCount
+ * Sets the mine count (10 - 20) from user input and initializes remaining flags.
+ * @param countSet Optional callback to run after mine count is set
+ * Authors: Janna Dungao, GitHub Copilot
  */
-
-// get mine count from user req. 10 - 20
 export function setMineCount(countSet?: () => void) {
     const countInput = document.getElementById('mineCount') as HTMLInputElement;
     const setMineCountBtn = document.getElementById('setMineCountBtn') as HTMLButtonElement;
@@ -40,16 +69,18 @@ export function setMineCount(countSet?: () => void) {
 }
 
 /**
- * 
- * @returns remaining flag count
+ * getFlagsRemaining
+ * Returns the number of flags remaining
+ * Authors: Janna Dungao, GitHub Copilot
  */
 
 export function getFlagsRemaining(): number {
     return flagsRemaining;
 }
 /**
- * 
- * @returns total mines in grid
+ * getMineCount
+ * Returns total mines in grid
+ * Authors: Janna Dungao, GitHub Copilot
  */
 export function getMineCount(): number {
     return mineCount;
@@ -57,17 +88,19 @@ export function getMineCount(): number {
 
 
 /**
- * 
- * @param change - +1 when user removes a flag, -1 when user adds a flag
+ * updateRemaining
+ * Updates remaining flag count by given change (+1 remove flag, -1 add flag)
+ * Authors: Janna Dungao, GitHub Copilot
  */
-
 export function updateRemaining(change: number): void {
     flagsRemaining += change;
     updateDisplay();
 }
 
 /**
- * Update count for html
+ * updateDisplay
+ * Updates mine count for html
+ * Authors: Janna Dungao, GitHub Copilot
  */
 export function updateDisplay(): void {
     const mineDisplay = document.getElementById('minesRemaining');
@@ -82,7 +115,8 @@ export function updateDisplay(): void {
 }
 
 /**
- * listen for when flag added/removed
+ * Listens for when flag added/removed
+ * Authors: Janna Dungao, GitHub Copilot
  */
 document.addEventListener('flagPlaced', (event: Event) => {
     const customEvent = event as CustomEvent<{ change: number }>; // get flag update from flagging.ts
@@ -90,7 +124,8 @@ document.addEventListener('flagPlaced', (event: Event) => {
 });
 
 /**
- * listen for game reset
+ * Listens for game reset
+ * Authors: Janna Dungao, Hunter Long, GitHub Copilot
  */
 const rstbtn = document.getElementById('reset') as HTMLButtonElement; // handle game reset
 rstbtn.addEventListener('click', () => {

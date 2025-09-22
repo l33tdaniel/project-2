@@ -1,3 +1,25 @@
+/*
+File: reveal.ts
+Authors: Elizabeth Miller, Anya Combs, Janna Dungao, Addison Bartelli, Hunter Long
+Creation Date: September 1, 2025
+Description: Initializes the game, handles first click, normal clicks, revealing cells, flood-fill, victory and game-over checks.
+
+Functions:
+1. startGame(): Initializes the game board, sets first-click listener, reset button, and mine counter.
+2. firstClickHandler(event): Handles the first user click, generates the minefield with safe zone, and reveals the first cell.
+3. normalClickHandler(event): Handles subsequent clicks after the first click, revealing cells unless flagged.
+4. revealCell(row, col): Reveals a cell, displays mines or numbers, applies flood-fill for empty cells, and checks for victory.
+5. checkVictory(): Checks if all non-mine cells are revealed and shows a victory message if true.
+6. countAdjacentMines(row, col): Counts the number of mines adjacent to a given cell.
+7. getCellCoordinates(cell): Returns the row and column indices of a clicked cell element.
+8. getCellElement(row, col): Returns the HTML element corresponding to a cell at (row, col) in the grid.
+
+Inputs/Outputs:
+- Inputs: User clicks on grid cells; mineCount from user input
+- Outputs: Updates DOM elements, minefield array, and game status messages
+
+External Sources: GitHub Copilot
+*/
 import { generateMinefield } from "./minefield_gen";
 import { getMineCount, setMineCount } from "./userMineCount";
 import { showPlayingStatus, hideStatus } from "./status";import { getFlaggedTiles, resetFlaggedTiles } from "./flagging";
@@ -5,8 +27,12 @@ import { showPlayingStatus, hideStatus } from "./status";import { getFlaggedTile
 let minefield: number[][] | null = null; // Initialize minefield as null (minefield starts empty)
 const rows = 10;
 const cols = 10;
-const mineCount = 10; // hardcoded
 
+/**
+ * startGame
+ * Initializes the Minesweeper game board and sets up event handlers.
+ * Authors: Elizabeth Miller, Anya Combs, Janna Dungao, GitHub Copilot
+ */
 export function startGame() {
     // Wait for the first click to generate minefield        
     console.log("startGame called");
@@ -46,6 +72,11 @@ export function startGame() {
     };
 }
 
+/**
+ * firstClickHandler
+ * Handles first user click, generates minefield, and reveals the first cell.
+ * Authors: Elizabeth Miller, Janna Dungao, Addison Bartelli, Hunter Long, GitHub Copilot
+ */
 function firstClickHandler(event: MouseEvent) {
     const target = event.target as HTMLElement; // the HTML element that was clicked
 
@@ -67,6 +98,11 @@ function firstClickHandler(event: MouseEvent) {
     container.addEventListener("click", normalClickHandler); // Listen for subsequent clicks
 }
 
+/**
+ * normalClickHandler
+ * Handles all clicks after the first click; ignores flagged tiles.
+ * Authors: Elizabeth Miller, Hunter Long, GitHub Copilot
+ */
 function normalClickHandler(event: MouseEvent) {
     const target = event.target as HTMLElement; // determine elememt clicked
 
@@ -84,7 +120,11 @@ function normalClickHandler(event: MouseEvent) {
     revealCell(row, col); // reveal tile
 }
 
-// Reveal a cell and apply flood-fill if needed
+/**
+ * revealCell
+ * Reveals a cell and applies flood-fill if needed.
+ * Authors: Elizabeth Miller, GitHub Copilot
+ */
 function revealCell(row: number, col: number) {
     if (!minefield) return; // If minefield is not generated yet, exit....is this necessary
 
@@ -150,6 +190,11 @@ function revealCell(row: number, col: number) {
     checkVictory();
 }
 
+/**
+ * checkVictory
+ * Checks if all non-mine cells are revealed; displays "You Win!" message if so.
+ * Authors: Elizabeth Miller, GitHub Copilot
+ */
 function checkVictory() {
     if (!minefield) return; // If minefield is not generated yet, exit
 
@@ -178,6 +223,11 @@ function checkVictory() {
     grid?.classList.add("grid-disabled",); // disable further clicks on the grid
 }
 
+/**
+ * countAdjacentMines
+ * Counts mines in the 8 surrounding cells.
+ * Authors: Elizabeth Miller, GitHub Copilot
+ */
 function countAdjacentMines(row: number, col: number): number {
     if (!minefield) return 0; // If minefield is not generated yet, return 0
     let count = 0;
@@ -196,8 +246,11 @@ function countAdjacentMines(row: number, col: number): number {
     return count;
 }
 
-// Helper functions:
-// Get row and column indices from a clicked cell element
+/**
+ * getCellCoordinates
+ * Returns row and column indices of a given grid tile element.
+ * Authors: Elizabeth Miller, GitHub Copilot
+ */
 function getCellCoordinates(cell: HTMLElement): {row: number, col: number} {
     const rowDiv = cell.parentElement; 
     const rowsArray = Array.from(rowDiv!.parentElement!.children); // array of all row divs
@@ -208,7 +261,12 @@ function getCellCoordinates(cell: HTMLElement): {row: number, col: number} {
 
     return { row, col };
 }
-// Get HTML element for a given row and column
+
+/**
+ * getCellElement
+ * Returns the HTML element of a cell at (row, col), or null if it doesn't exist.
+ * Authors: Elizabeth Miller, GitHub Copilot
+ */
 function getCellElement(row: number, col: number): HTMLElement | null {
     const rowDiv = document.getElementById(`grid-row-${row + 1}`);
     if (!rowDiv) return null; // if row doesn't exist, return null

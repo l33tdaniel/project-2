@@ -1,3 +1,21 @@
+<!--
+File: index.html
+Authors: Addison Bartelli, Anya Combs, Janna Dungao, Elizabeth Miller, Marco Martinez
+Creation Date: August 28, 2025
+Description: Main HTML page for Minesweeper
+
+
+Key Elements:
+- <nav>: Contains title, source link, and about button.
+- #game-message: Displays game over or victory messages.
+- #mineTextUI: Input for mine count and display for flags remaining.
+- #statusIndicator: Displays current game status (e.g., "Playing").
+- #grid-headers-wrapper: Contains column and row labels.
+- #grid: Container for the Minesweeper grid, dynamically filled via create_grid.ts.
+
+External Sources: None
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +26,7 @@
     <title>Minesweeper</title>
 </head>
 <body>
+<!-- Navigation bar -->
 <nav>
     <div>
         <section id="nav-title">Minesweeper</section>
@@ -15,7 +34,7 @@
             <a href="https://github.com/addiebart/minesweeper">Source</a>
         </section>
         <section id="nav-authors">
-            <a>About</a>
+            <a>About</a> 
         </section>
     </div>
 </nav>
@@ -38,11 +57,8 @@
         <p>Status: <span id="statusText"></span></p>
     </div>
     <div id="grid-headers-wrapper">
-        <div class="grid-header-row" >
-
-        </div>
-        <div class="grid-header-column">
-        </div>
+        <div class="grid-header-row"></div>
+        <div class="grid-header-column"></div>
     <div id="grid">
         <!-- gets filled by create_grid.ts -->
     </div>

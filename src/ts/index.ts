@@ -22,6 +22,7 @@ import { setFlaggingHandlers } from "./flagging"; // right-click flagging logic
 import { startGame } from "./reveal"; // main game start logic
 import { addLabels } from "./create_grid"; // labeling functions
 import { setMineCount } from "./userMineCount"; // initialize number of mines
+import { makeAIMove, AIDifficulty } from "./ai_solver";
 
 // Initialize game once the window finishes loading
 window.onload = () => {

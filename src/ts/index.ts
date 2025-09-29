@@ -17,12 +17,13 @@ External Sources: None
 
 import "../css/index.css" // global stylesheet for Minesweeper UI
 
-import { fillGrid } from "./create_grid"; // grid creation 
+import { fillGrid } from "./create_grid"; // grid creation
 import { setFlaggingHandlers } from "./flagging"; // right-click flagging logic
 import { startGame } from "./reveal"; // main game start logic
 import { addLabels } from "./create_grid"; // labeling functions
 import { setMineCount } from "./userMineCount"; // initialize number of mines
 import { makeAIMove, AIDifficulty } from "./ai_solver";
+import { startTimer, stopTimer, resetTimer } from "./timer";
 
 // Initialize game once the window finishes loading
 window.onload = () => {
@@ -34,8 +35,9 @@ window.onload = () => {
 
     setFlaggingHandlers(tileMatrix); // set event handlers for right-click
     setMineCount(); // initialize the minecounter
-    startGame(); // start the main game
+    startGame(tileMatrix); // start the main game
 
     const aboutBtn: HTMLElement = document.querySelector("section#nav-authors>a")!; // get the about button
     aboutBtn.onclick = () => alert("This Minesweeper was made by Addison, Anya, Marco, Janna, Elizabeth, and Hunter."); // set the alert action
 };
+

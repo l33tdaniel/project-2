@@ -22,7 +22,11 @@ External Sources: GitHub Copilot
 */
 import { generateMinefield } from "./minefield_gen";
 import { getMineCount, setMineCount } from "./userMineCount";
-import { showPlayingStatus, hideStatus } from "./status";import { getFlaggedTiles, resetFlaggedTiles } from "./flagging";
+import { showPlayingStatus, hideStatus } from "./status";
+import { getFlaggedTiles, resetFlaggedTiles } from "./flagging";
+import { startTimer, stopTimer, resetTimer } from "./timer";
+import { makeAIMove, AIDifficulty } from "./ai_solver";
+import type { GridTile } from "./localTypes";
 
 let minefield: number[][] | null = null; // Initialize minefield as null (minefield starts empty)
 const rows = 10;
@@ -33,8 +37,8 @@ const cols = 10;
  * Initializes the Minesweeper game board and sets up event handlers.
  * Authors: Elizabeth Miller, Anya Combs, Janna Dungao, GitHub Copilot
  */
-export function startGame() {
-    // Wait for the first click to generate minefield        
+export function startGame(tileMatrix: GridTile[][]) {
+    // Wait for the first click to generate minefield
     console.log("startGame called");
     const gameover = document.getElementById("gameover"); // set gameover back to hidden
     gameover != null ? gameover.style.visibility = 'hidden' : null;
@@ -42,7 +46,7 @@ export function startGame() {
         showPlayingStatus(); // show status once game starts
         const container = document.getElementById("grid")!;
         console.log(container); // should not be null
-        container.addEventListener("click", firstClickHandler, { once: true }); // runs firstClickHandler when user clicks the container grid
+        container.addEventListener("click", (event) => firstClickHandler(event, tileMatrix), { once: true }); // runs firstClickHandler when user clicks the container grid
     });
     const rstbtn = document.getElementById('reset') as HTMLButtonElement;
     let countInput = document.getElementById('mineCount') as HTMLInputElement;
@@ -68,7 +72,7 @@ export function startGame() {
         
         const grid = document.getElementById('grid');
         grid?.classList.remove('grid-disabled',); // re-enable grid
-        startGame(); // reset board, which attaches first-click listener again
+        location.reload(); // reload the page to reset the game
     };
 }
 
@@ -77,7 +81,7 @@ export function startGame() {
  * Handles first user click, generates minefield, and reveals the first cell.
  * Authors: Elizabeth Miller, Janna Dungao, Addison Bartelli, Hunter Long, GitHub Copilot
  */
-function firstClickHandler(event: MouseEvent) {
+function firstClickHandler(event: MouseEvent, tileMatrix: GridTile[][]) {
     const target = event.target as HTMLElement; // the HTML element that was clicked
 
     if (!target.classList.contains("grid-tile")) return; // if the clicked element is not a grid tile, exit
@@ -87,15 +91,16 @@ function firstClickHandler(event: MouseEvent) {
     const container = document.getElementById("grid")!; // get the outer grid
     if (flagged !== undefined && flagged > 0) { // if tile flagged
         console.log(`Tile (${row},${col}) is flagged, cannot reveal.`);
-        container.addEventListener("click", firstClickHandler, { once: true }); // reapply first click listener
+        container.addEventListener("click", (event) => firstClickHandler(event, tileMatrix), { once: true }); // reapply first click listener
         return
     }; // If the cell is flagged, do not reveal it
     // Get user inputted mine count
     const mineCount = getMineCount();
     // Generate minefield with safe zone around first click
     minefield = generateMinefield({ row, col }, rows, cols, 1, mineCount) // safeZone is set to radius 1 (so 3x3 area is safe)
+    startTimer();
     revealCell(row, col); // reveal the clicked cell
-    container.addEventListener("click", normalClickHandler); // Listen for subsequent clicks
+    container.addEventListener("click", (event) => normalClickHandler(event, tileMatrix)); // Listen for subsequent clicks
 }
 
 /**
@@ -103,7 +108,7 @@ function firstClickHandler(event: MouseEvent) {
  * Handles all clicks after the first click; ignores flagged tiles.
  * Authors: Elizabeth Miller, Hunter Long, GitHub Copilot
  */
-function normalClickHandler(event: MouseEvent) {
+function normalClickHandler(event: MouseEvent, tileMatrix: GridTile[][]) {
     const target = event.target as HTMLElement; // determine elememt clicked
 
     if (!target.classList.contains("grid-tile")) return; // ensure element is a gridtile
@@ -116,8 +121,23 @@ function normalClickHandler(event: MouseEvent) {
         return
     }; // If the cell is flagged, do not reveal it
 
-    
+
     revealCell(row, col); // reveal tile
+
+    const aiDifficultyElement = document.getElementById("aiDifficulty") as HTMLSelectElement;
+    const aiDifficulty = aiDifficultyElement.value;
+
+    if (aiDifficulty !== "none" && minefield) {
+        let difficulty: AIDifficulty;
+        if (aiDifficulty === "easy") {
+            difficulty = AIDifficulty.Easy;
+        } else if (aiDifficulty === "medium") {
+            difficulty = AIDifficulty.Medium;
+        } else {
+            difficulty = AIDifficulty.Hard;
+        }
+        makeAIMove(difficulty, minefield, tileMatrix);
+    }
 }
 
 /**
@@ -125,7 +145,7 @@ function normalClickHandler(event: MouseEvent) {
  * Reveals a cell and applies flood-fill if needed.
  * Authors: Elizabeth Miller, GitHub Copilot
  */
-function revealCell(row: number, col: number) {
+export function revealCell(row: number, col: number) {
     if (!minefield) return; // If minefield is not generated yet, exit....is this necessary
 
     const cell = getCellElement(row, col); // div element for specific cell
@@ -148,6 +168,7 @@ function revealCell(row: number, col: number) {
             msgText.textContent = "Game Over";
             msg.style.visibility = "visible";
         }
+        stopTimer();
 
         // show mines
         const tiles = document.getElementsByClassName('grid-tile');
@@ -218,6 +239,7 @@ function checkVictory() {
         msgText.textContent = "You Win!";
         msg.style.visibility = "visible";
     }
+    stopTimer();
 
     const grid = document.getElementById("grid");
     grid?.classList.add("grid-disabled",); // disable further clicks on the grid
@@ -228,7 +250,7 @@ function checkVictory() {
  * Counts mines in the 8 surrounding cells.
  * Authors: Elizabeth Miller, GitHub Copilot
  */
-function countAdjacentMines(row: number, col: number): number {
+export function countAdjacentMines(row: number, col: number): number {
     if (!minefield) return 0; // If minefield is not generated yet, return 0
     let count = 0;
 
@@ -272,3 +294,4 @@ function getCellElement(row: number, col: number): HTMLElement | null {
     if (!rowDiv) return null; // if row doesn't exist, return null
     return rowDiv.children[col] as HTMLElement; // otherwise, return the div element for the specific cell at [row, col]
 }
+

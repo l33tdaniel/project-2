@@ -45,6 +45,7 @@ Description: Chooses a random unrevealed and unflagged tile to reveal, easy AI
 */
 function easyMove(minefield: number[][], tileMatrix: GridTile[][]) {
     const unrevealedTiles: { row: number, col: number }[] = [];
+    // Go thru the board and add each unrevealed tile into a list
     for (let r = 0; r < tileMatrix.length; r++) {
         for (let c = 0; c < tileMatrix[r]!.length; c++) {
             const tile = tileMatrix[r]![c]!;
@@ -54,6 +55,7 @@ function easyMove(minefield: number[][], tileMatrix: GridTile[][]) {
         }
     }
 
+    // Pick a random one (if availible)
     if (unrevealedTiles.length > 0) {
         const randomIndex = Math.floor(Math.random() * unrevealedTiles.length);
         const randomTile = unrevealedTiles[randomIndex]!;
@@ -133,6 +135,7 @@ Description: Uses the minefield layout to find and select a random safe tile
 */
 function hardMove(minefield: number[][], tileMatrix: GridTile[][]) {
     const safeTiles: { row: number, col: number }[] = [];
+    // Get all the safe tiles in a list
     for (let r = 0; r < tileMatrix.length; r++) {
         for (let c = 0; c < tileMatrix[r]!.length; c++) {
             const tile = tileMatrix[r]![c]!;
@@ -142,6 +145,7 @@ function hardMove(minefield: number[][], tileMatrix: GridTile[][]) {
         }
     }
 
+    // Pick a random safe tile
     if (safeTiles.length > 0) {
         const randomIndex = Math.floor(Math.random() * safeTiles.length);
         const randomTile = safeTiles[randomIndex]!;

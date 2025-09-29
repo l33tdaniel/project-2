@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+// Last updated by Brett Balquist to get audio
 module.exports = {
     mode: 'production',
     entry: './src/ts/index.ts',

@@ -1,6 +1,6 @@
 /*
 File: index.ts
-Authors: Addison Bartelli, Marco Martinez, Janna Dungao, Elizabeth Miller
+Authors: Addison Bartelli, Marco Martinez, Janna Dungao, Elizabeth Miller, Brett Balquist, Daniel Neugent
 Creation Date: September 1, 2025
 Description: Main entry point for the Minesweeper game. Initializes the grid, labels, flagging, mine counter, 
              and game start. Also handles UI interactions like the About button.
@@ -13,6 +13,8 @@ Inputs/Outputs:
 - Outputs: none directly; modifies DOM and sets up game logic
 
 External Sources: None
+
+Edited on 9/29 to include the timer and AI
 */
 
 import "../css/index.css" // global stylesheet for Minesweeper UI
@@ -22,8 +24,8 @@ import { setFlaggingHandlers } from "./flagging"; // right-click flagging logic
 import { startGame } from "./reveal"; // main game start logic
 import { addLabels } from "./create_grid"; // labeling functions
 import { setMineCount } from "./userMineCount"; // initialize number of mines
-import { makeAIMove, AIDifficulty } from "./ai_solver";
-import { startTimer, stopTimer, resetTimer } from "./timer";
+import { makeAIMove, AIDifficulty } from "./ai_solver"; // add ai solver
+import { startTimer, stopTimer, resetTimer } from "./timer"; // add timer
 
 // Initialize game once the window finishes loading
 window.onload = () => {

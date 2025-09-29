@@ -15,6 +15,13 @@ export enum AIDifficulty {
     Hard
 }
 
+/*
+Authors: Daniel Neugent
+Inputs: difficulty (Easy, Medium, or Hard), minefield (mine layout),
+        tileMatrix (Game board)
+Outputs: None
+Description: Selects the AI move strategy (easy, medium, or hard) based on difficulty level.
+*/
 export function makeAIMove(difficulty: AIDifficulty, minefield: number[][], tileMatrix: GridTile[][]) {
     switch (difficulty) {
         case AIDifficulty.Easy:
@@ -29,6 +36,13 @@ export function makeAIMove(difficulty: AIDifficulty, minefield: number[][], tile
     }
 }
 
+/*
+Authors: Daniel Neugent
+Inputs: difficulty (Easy, Medium, or minefield (mine layout),
+        tileMatrix (Game board)
+Outputs: None
+Description: Chooses a random unrevealed and unflagged tile to reveal, easy AI
+*/
 function easyMove(minefield: number[][], tileMatrix: GridTile[][]) {
     const unrevealedTiles: { row: number, col: number }[] = [];
     for (let r = 0; r < tileMatrix.length; r++) {
@@ -47,6 +61,15 @@ function easyMove(minefield: number[][], tileMatrix: GridTile[][]) {
     }
 }
 
+/*
+Authors: Daniel Neugent
+Inputs: difficulty (Easy, Medium, or minefield (mine layout),
+        tileMatrix (Game board)
+Outputs: None
+Description: Reveal a safe tile using logic (revealed numbers and flagged tiles)
+             If no logical move is found, defaults to a random move.
+             Medium AI
+*/
 function mediumMove(minefield: number[][], tileMatrix: GridTile[][]) {
     // Find a revealed tile with a number
     let revealedTile: { row: number, col: number, adjacentMines: number } | null = null;
@@ -100,6 +123,14 @@ function mediumMove(minefield: number[][], tileMatrix: GridTile[][]) {
     easyMove(minefield, tileMatrix);
 }
 
+/*
+Authors: Daniel Neugent
+Inputs: difficulty (Easy, Medium, or minefield (mine layout),
+        tileMatrix (Game board)
+Outputs: None
+Description: Uses the minefield layout to find and select a random safe tile
+             Hard AI
+*/
 function hardMove(minefield: number[][], tileMatrix: GridTile[][]) {
     const safeTiles: { row: number, col: number }[] = [];
     for (let r = 0; r < tileMatrix.length; r++) {

@@ -19,6 +19,13 @@ module.exports = {
         exclude: /node_modules/,
         },
         {
+        test: /\.mp3?$/i,
+        type: "asset/resource",
+        generator: {
+            filename: "assets/sounds/[name][ext]"
+        }
+        },
+        {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
         exclude: /node_modules/,

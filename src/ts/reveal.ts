@@ -27,10 +27,18 @@ import { getFlaggedTiles, resetFlaggedTiles } from "./flagging";
 import { startTimer, stopTimer, resetTimer } from "./timer";
 import { makeAIMove, AIDifficulty } from "./ai_solver";
 import type { GridTile } from "./localTypes";
+import bombSoundFile from "../assets/sounds/explosion.mp3";
+import yaySoundFile from "../assets/sounds/yay.mp3";
+import youLoseFile from "../assets/sounds/youLose.mp3";
 
 let minefield: number[][] | null = null; // Initialize minefield as null (minefield starts empty)
 const rows = 10;
 const cols = 10;
+
+const bombSound = new Audio(bombSoundFile);
+const yaySound = new Audio(yaySoundFile);
+const youLose = new Audio(youLoseFile);
+
 
 /**
  * startGame
@@ -157,6 +165,7 @@ export function revealCell(row: number, col: number) {
     if (value === 1) {
         cell.textContent = "💣"; // Display mine
         cell.classList.add("revealed"); // Mark cell as revealed
+        bombSound.play();//bomb go BOOM
 
         const grid = document.getElementById('grid'); // get outer grid
         grid?.classList.add('grid-disabled',);
@@ -168,6 +177,7 @@ export function revealCell(row: number, col: number) {
             msgText.textContent = "Game Over";
             msg.style.visibility = "visible";
         }
+        youLose.play()
         stopTimer();
 
         // show mines
@@ -190,6 +200,8 @@ export function revealCell(row: number, col: number) {
     else {
         cell.textContent = ""; // Empty cell for 0 adjacent mines
     }
+    yaySound.currentTime = 0;
+    yaySound.play();
 
     // If no adjacent mines, recursively reveal neighboring cells (flood-fill)
     if (adjacentMines === 0) {

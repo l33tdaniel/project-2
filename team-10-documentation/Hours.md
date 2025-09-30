@@ -14,7 +14,7 @@ Note: All people had an extra 1 hour due to weekly meetings
 ## Estimates
 Jay's estimate: Finniky nature of CSS and difficulty with UI along with working on someone else's project which may or may not work leads to an estimation of 2 hrs. This is an overestimation assuming something doesn't work
 Arnav's estimation: Documentation took 1 hour last time so same estimation this time
-Brett's estimation: Finding or making audio can have its own challenges, coupled with the fact that it is integrating to an unfamiliar codebase leads to an estimation of 2 housr
+Brett's estimation: Finding or making audio can have its own challenges, coupled with the fact that it is integrating to an unfamiliar codebase leads to an estimation of 2 hours
 Tej's estimation: 
 Daniel's estimation: Creating the AI for it seems challenging, but the involves starting from scratch. This leads to an estimation of 1.5hrs
 

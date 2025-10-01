@@ -23,11 +23,21 @@ export function setupUIInteractions() {
     setupFloatingInstructions();
     setupMineCountValidation();
     setupPresetButtons();
+    setupAIControls();
     setupAboutModal();
     
     // Listen for game start events
     document.addEventListener('gameStarted', () => {
         gameStarted = true;
+        disableAISelection();
+        disableMineCountControls();
+    });
+    
+    // Listen for game reset events
+    document.addEventListener('gameReset', () => {
+        gameStarted = false;
+        enableAISelection();
+        enableMineCountControls();
     });
 }
 
@@ -84,6 +94,12 @@ function setupPresetButtons() {
     presetButtons.forEach(button => {
         button.addEventListener('click', (e) => {
             e.preventDefault();
+            
+            // Check if game has started - prevent changes mid-game
+            if (gameStarted) {
+                showToast('Cannot change mine count mid-game! Finish current game or refresh to start new.', 'warning');
+                return;
+            }
             
             // Get the mine count from data attribute
             const mineCount = button.getAttribute('data-mines');
@@ -164,6 +180,130 @@ function setupAboutModal() {
 }
 
 /**
+ * Setup AI controls functionality
+ * Handles AI selection changes and displays current selection
+ */
+function setupAIControls() {
+    const aiSelect = document.getElementById('aiDifficulty') as HTMLSelectElement;
+    const aiStatusDisplay = document.getElementById('currentAISelection');
+
+    if (aiSelect && aiStatusDisplay) {
+        // Handle AI selection changes
+        aiSelect.addEventListener('change', (e) => {
+            const target = e.target as HTMLSelectElement;
+            
+            // Check if game has started - prevent changes mid-game
+            if (gameStarted) {
+                showToast('Cannot change AI selection mid-game! Finish current game or refresh to start new.', 'warning');
+                // Revert selection to previous value
+                return;
+            }
+            
+            updateAIDisplay(target.value, aiStatusDisplay);
+            showToast(`AI Assistant set to ${getAIDisplayName(target.value)}`, 'success');
+        });
+
+        // Set initial display
+        updateAIDisplay(aiSelect.value, aiStatusDisplay);
+    }
+}
+
+/**
+ * Update the AI status display
+ */
+function updateAIDisplay(aiValue: string, displayElement: HTMLElement): void {
+    const displayText = getAIDisplayText(aiValue);
+    displayElement.textContent = displayText;
+}
+
+/**
+ * Get display text for AI selection
+ */
+function getAIDisplayText(aiValue: string): string {
+    switch (aiValue) {
+        case 'none': return '🧠 None Selected';
+        case 'easy': return '😊 Easy AI Active';
+        case 'medium': return '🤔 Medium AI Active';
+        case 'hard': return '🤖 Hard AI Active';
+        default: return '🧠 None Selected';
+    }
+}
+
+/**
+ai selection */
+function getAIDisplayName(aiValue: string): string {
+    switch (aiValue) {
+        case 'none': return 'None';
+        case 'easy': return 'Easy AI';
+        case 'medium': return 'Medium AI';
+        case 'hard': return 'Hard AI';
+        default: return 'None';
+    }
+}
+
+/**
+ * Disable AI selection during gameplay
+ */
+function disableAISelection(): void {
+    const aiSelect = document.getElementById('aiDifficulty') as HTMLSelectElement;
+    if (aiSelect) {
+        aiSelect.disabled = true;
+    }
+}
+
+/**
+ * Enable AI selection when game is reset
+ */
+function enableAISelection(): void {
+    const aiSelect = document.getElementById('aiDifficulty') as HTMLSelectElement;
+    if (aiSelect) {
+        aiSelect.disabled = false;
+    }
+}
+
+/**
+ * Disable mine count controls during gameplay
+ */
+function disableMineCountControls(): void {
+    const presetButtons = document.querySelectorAll('.preset-btn') as NodeListOf<HTMLButtonElement>;
+    const mineCountInput = document.getElementById('mineCount') as HTMLInputElement;
+    const startGameBtn = document.getElementById('setMineCountBtn') as HTMLButtonElement;
+    
+    presetButtons.forEach(button => {
+        button.disabled = true;
+    });
+    
+    if (mineCountInput) {
+        mineCountInput.disabled = true;
+    }
+    
+    if (startGameBtn) {
+        startGameBtn.disabled = true;
+    }
+}
+
+/**
+ * Enable mine count controls when game is reset
+ */
+function enableMineCountControls(): void {
+    const presetButtons = document.querySelectorAll('.preset-btn') as NodeListOf<HTMLButtonElement>;
+    const mineCountInput = document.getElementById('mineCount') as HTMLInputElement;
+    const startGameBtn = document.getElementById('setMineCountBtn') as HTMLButtonElement;
+    
+    presetButtons.forEach(button => {
+        button.disabled = false;
+    });
+    
+    if (mineCountInput) {
+        mineCountInput.disabled = false;
+    }
+    
+    if (startGameBtn) {
+        startGameBtn.disabled = false;
+    }
+}
+
+/**
  Setup mine count validation and grid click prevention
  */
 function setupMineCountValidation() {
@@ -173,11 +313,23 @@ function setupMineCountValidation() {
 
     // Track when mine count is properly set
     mineCountInput?.addEventListener('input', () => {
+        // Check if game has started - prevent changes mid-game
+        if (gameStarted) {
+            showToast('Cannot change mine count mid-game! Finish current game or refresh to start new.', 'warning');
+            return;
+        }
+        
         const value = parseInt(mineCountInput.value);
         mineCountSelected = !isNaN(value) && value >= 10 && value <= 20;
     });
 
     startGameBtn?.addEventListener('click', () => {
+        // Check if game has already started
+        if (gameStarted) {
+            showToast('Game already in progress! Finish current game or refresh to start new.', 'warning');
+            return;
+        }
+        
         const value = parseInt(mineCountInput?.value || '0');
         if (value >= 10 && value <= 20) {
             mineCountSelected = true;

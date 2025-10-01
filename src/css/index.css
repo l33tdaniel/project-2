@@ -331,6 +331,53 @@ Individual Preset Button Styling
     transform: translateY(-1px);
 }
 
+/* 
+🚫 Disabled Preset Buttons (during gameplay)
+- Visual indication that buttons cannot be used mid-game
+- Maintains layout but shows unavailable state
+*/
+.preset-btn:disabled {
+    background: rgba(200, 200, 200, 0.5) !important;
+    color: rgba(102, 126, 234, 0.4) !important;
+    border-color: rgba(102, 126, 234, 0.2) !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+}
+
+.preset-btn:disabled:hover {
+    background: rgba(200, 200, 200, 0.5) !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* 
+🚫 Disabled Mine Count Input (during gameplay)
+- Prevents manual mine count changes mid-game
+*/
+#mineCount:disabled {
+    background: rgba(200, 200, 200, 0.5);
+    color: rgba(102, 126, 234, 0.4);
+    border-color: rgba(102, 126, 234, 0.2);
+    cursor: not-allowed;
+}
+
+/* 
+🚫 Disabled Start Game Button (during gameplay)
+*/
+#setMineCountBtn:disabled {
+    background: rgba(200, 200, 200, 0.5) !important;
+    color: rgba(102, 126, 234, 0.4) !important;
+    border-color: rgba(102, 126, 234, 0.2) !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+}
+
+#setMineCountBtn:disabled:hover {
+    background: rgba(200, 200, 200, 0.5) !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
 .ai-controls {
     display: flex;
     gap: 0.5rem;
@@ -370,6 +417,41 @@ Individual Preset Button Styling
 .ai-controls button:disabled:hover {
     transform: none;
     box-shadow: none;
+}
+
+/* 
+🤖 AI Status Display (replaces AI Move button)
+- Shows currently selected AI level clearly
+- Styled to match other stat displays
+- Updates when AI selection changes
+*/
+.ai-status-display {
+    margin-top: 0.75rem;
+    background: rgba(102, 126, 234, 0.1);
+    border: 2px solid rgba(102, 126, 234, 0.3);
+    border-radius: var(--border-radius);
+    padding: 0.75rem;
+    text-align: center;
+    font-weight: 600;
+    color: var(--primary);
+    font-size: 0.95rem;
+}
+
+#currentAISelection {
+    display: block;
+    font-weight: 700;
+    color: var(--dark);
+}
+
+/* 
+🚫 Disabled AI Select (during gameplay)
+- Visual indication that AI selection cannot be changed mid-game
+*/
+#aiDifficulty:disabled {
+    background: rgba(200, 200, 200, 0.5);
+    color: rgba(102, 126, 234, 0.4);
+    border-color: rgba(102, 126, 234, 0.2);
+    cursor: not-allowed;
 }
 
 /* 

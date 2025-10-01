@@ -1,7 +1,7 @@
 
 /*
 File: index.ts
-Authors: Addison Bartelli, Marco Martinez, Janna Dungao, Elizabeth Miller, Brett Balquist, Daniel Neugent
+Authors: Addison , Marco , Janna , Elizabeth , Brett Balquist, Daniel Neugent
 Creation Date: September 1, 2025
 Description: Main entry point for the Minesweeper game. Initializes the grid, labels, flagging, mine counter, 
              and game start. Also handles UI interactions like the About button and modern UI enhancements.

@@ -240,6 +240,29 @@ External Sources: Google Fonts (Inter family), GitHub repository link
                 </div>
             </div>
         </div>
+    </section>
+    <div id="statusIndicator" style="display: none;">
+        <p>Status: <span id="statusText"></span></p>
+    </div>
+    <!-- Brett Balquist: Add the timer and AI elements-->
+    <div id="timerUI">
+        <p>Time: <span id="timer">0</span></p>
+    </div>
+    <section id="aiUI">
+        <label for="aiDifficulty">AI Difficulty:</label>
+        <select id="aiDifficulty" name="aiDifficulty">
+            <option value="none">None</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+            <option value="none">Automatic Mode</option>
+        </select>
+    </section>
+    <div id="grid-headers-wrapper">
+        <div class="grid-header-row"></div>
+        <div class="grid-header-column"></div>
+    <div id="grid">
+        <!-- gets filled by create_grid.ts -->
     </div>
 </div>
 

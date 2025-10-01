@@ -1,6 +1,6 @@
 /*
 File: ui_interactions.ts
-Authors: GitHub Copilot Enhancement
+Authors: Jay Patel
 Creation Date: September 30, 2025
 Description: Handles UI interactions for modals, validations, and enhanced UX features.
 
@@ -17,7 +17,7 @@ let gameStarted = false;
 let mineCountSelected = false;
 
 /**
- * Initialize all UI interactions
+ Initialize all UI interactions
  */
 export function setupUIInteractions() {
     setupFloatingInstructions();
@@ -32,7 +32,7 @@ export function setupUIInteractions() {
 }
 
 /**
- * Setup floating instructions panel
+ Setup floating instructions panel
  */
 function setupFloatingInstructions() {
     const toggleBtn = document.getElementById('instructionsToggle');
@@ -75,7 +75,7 @@ function setupFloatingInstructions() {
 }
 
 /**
- * Setup preset button functionality for mine count selection
+ Setup preset button functionality for mine count selection
  */
 function setupPresetButtons() {
     const presetButtons = document.querySelectorAll('.preset-btn');
@@ -164,7 +164,7 @@ function setupAboutModal() {
 }
 
 /**
- * Setup mine count validation and grid click prevention
+ Setup mine count validation and grid click prevention
  */
 function setupMineCountValidation() {
     const mineCountInput = document.getElementById('mineCount') as HTMLInputElement;
@@ -196,7 +196,7 @@ function setupMineCountValidation() {
 }
 
 /**
- * Show a non-intrusive toast message
+  Show a non-intrusive toast message
  */
 export function showToast(message: string, type: 'info' | 'warning' | 'success' | 'error' = 'info') {
     // Remove any existing toast

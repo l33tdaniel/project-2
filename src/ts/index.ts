@@ -1,9 +1,10 @@
+
 /*
 File: index.ts
 Authors: Addison Bartelli, Marco Martinez, Janna Dungao, Elizabeth Miller, Brett Balquist, Daniel Neugent
 Creation Date: September 1, 2025
 Description: Main entry point for the Minesweeper game. Initializes the grid, labels, flagging, mine counter, 
-             and game start. Also handles UI interactions like the About button.
+             and game start. Also handles UI interactions like the About button and modern UI enhancements.
 
 Functions:
 - window.onload: initializes the game after the page loads
@@ -15,6 +16,7 @@ Inputs/Outputs:
 External Sources: None
 
 Edited on 9/29 to include the timer and AI
+Updated on 9/30 to include modern UI enhancements
 */
 
 import "../css/index.css" // global stylesheet for Minesweeper UI
@@ -26,6 +28,8 @@ import { addLabels } from "./create_grid"; // labeling functions
 import { setMineCount } from "./userMineCount"; // initialize number of mines
 import { makeAIMove, AIDifficulty } from "./ai_solver"; // add ai solver
 import { startTimer, stopTimer, resetTimer } from "./timer"; // add timer
+import { setupUIInteractions } from "./ui_interactions"; // enhanced UI interactions
+import { initializeUIEnhancements } from "./ui_enhancements"; // modern UI enhancements
 
 // Initialize game once the window finishes loading
 window.onload = () => {
@@ -38,8 +42,13 @@ window.onload = () => {
     setFlaggingHandlers(tileMatrix); // set event handlers for right-click
     setMineCount(); // initialize the minecounter
     startGame(tileMatrix); // start the main game
-
-    const aboutBtn: HTMLElement = document.querySelector("section#nav-authors>a")!; // get the about button
-    aboutBtn.onclick = () => alert("This Minesweeper was made by Addison, Anya, Marco, Janna, Elizabeth, and Hunter."); // set the alert action
+    
+    // Initialize enhanced UI interactions
+    setupUIInteractions();
+    
+    // Show game instructions by default for first-time users
+    const instructions = document.querySelector('.game-instructions') as HTMLElement;
+    if (instructions) {
+        instructions.style.display = 'block';
+    }
 };
-

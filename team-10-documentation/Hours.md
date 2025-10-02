@@ -3,8 +3,8 @@
 ## Overview
 | Name           | Stuff                    | Estimated hrs | Actual hrs |
 | -------------- | ------------------------ | ------------- | ---------- |
-| Jay Patel      | CSS UI + testing         | 2             |            |
-| Arnav Jain     | documentation + comments | 1             | .75        |
+| Jay Patel      | CSS UI + testing         | 2             | 3.5        |
+| Arnav Jain     | documentation + comments | 1             | 1          |
 | Brett Balquist | Adding Audio             | 2             | 1.5        |
 | Tej Gumaste    | Documentation            | 1             | 1          |
 | Daniel Neugent | AI engine                | 1.5           | 1.5        |
@@ -29,3 +29,9 @@ Arnav 09/29: Spent 45m writing documentation and comments. His familiarity with 
 
 ### 09/30
 Tej 09/30: Spent 1hr writing about the architecture and creating a graphic. Since JavaScript was used, understanding the code was relatively easy and only took 45m. Making the graphic took longer than expected due to unfamiliarity with the graph software.
+
+### 10/01
+Jay 10/01: Spent 3.5hrs working on CSS. This took much longer than expected because Jay went above and beyond when it came to the UI. We had accounted for CSS being hard, but we did not account for a complete overhaul of the old UI. The hard worked paid off though as the UI is super nice.
+
+### 10/02
+Arnav 10/02: Arnav spent like 15m updating the documentation and making sure everything looked a-okay. Also had to fix the comments a little bit.

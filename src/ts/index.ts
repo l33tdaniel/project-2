@@ -1,7 +1,7 @@
 
 /*
 File: index.ts
-Authors: Addison , Marco , Janna , Elizabeth , Brett Balquist, Daniel Neugent
+Authors: Addison , Marco , Janna , Elizabeth
 Creation Date: September 1, 2025
 Description: Main entry point for the Minesweeper game. Initializes the grid, labels, flagging, mine counter, 
              and game start. Also handles UI interactions like the About button and modern UI enhancements.
@@ -18,6 +18,8 @@ External Sources: None
 Edited on 9/29 to include the timer and AI
 Updated on 9/30 to include modern UI enhancements
 */
+
+// Modified by Daniel Neugent and Brett Balquist to add the AI, timer, and audio
 
 import "../css/index.css" // global stylesheet for Minesweeper UI
 

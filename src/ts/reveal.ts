@@ -1,6 +1,6 @@
 /*
 File: reveal.ts
-Authors: Elizabeth Miller, Anya Combs, Janna Dungao, Addison Bartelli, Hunter Long, Brett Balquist
+Authors: Elizabeth Miller, Anya Combs, Janna Dungao, Addison Bartelli, Hunter Long
 Creation Date: September 1, 2025
 Description: Initializes the game, handles first click, normal clicks, revealing cells, flood-fill, victory and game-over checks.
 
@@ -20,7 +20,7 @@ Inputs/Outputs:
 
 External Sources: GitHub Copilot
 
-Updated on 9/29/2025 to include the AI and audio
+Updated on 9/29/2025 to include the audio and timer by Brett Balquist
 */
 import { generateMinefield } from "./minefield_gen";
 import { getMineCount, setMineCount } from "./userMineCount";
@@ -45,8 +45,10 @@ const youLose = new Audio(youLoseFile);
 /**
  * startGame
  * Initializes the Minesweeper game board and sets up event handlers.
- * Authors: Elizabeth Miller, Anya Combs, Janna Dungao, GitHub Copilot, Brett Balquist
+ * Authors: Elizabeth Miller, Anya Combs, Janna Dungao, GitHub Copilot
  */
+
+// Modified by Brett Balquist to add the timer
 export function startGame(tileMatrix: GridTile[][]) {
     // Wait for the first click to generate minefield
     console.log("startGame called");
@@ -89,8 +91,10 @@ export function startGame(tileMatrix: GridTile[][]) {
 /**
  * firstClickHandler
  * Handles first user click, generates minefield, and reveals the first cell.
- * Authors: Elizabeth Miller, Janna Dungao, Addison Bartelli, Hunter Long, GitHub Copilot, Brett Balquist
+ * Authors: Elizabeth Miller, Janna Dungao, Addison Bartelli, Hunter Long, GitHub Copilot,
  */
+
+// Modified by Brett Balquist for audio and timer
 function firstClickHandler(event: MouseEvent, tileMatrix: GridTile[][]) {
     const target = event.target as HTMLElement; // the HTML element that was clicked
 
@@ -117,8 +121,9 @@ function firstClickHandler(event: MouseEvent, tileMatrix: GridTile[][]) {
  * normalClickHandler
  * Handles all clicks after the first click; ignores flagged tiles. 
  * Updated to include the AI
- * Authors: Elizabeth Miller, Hunter Long, GitHub Copilot, Brett Balquist
+ * Authors: Elizabeth Miller, Hunter Long, GitHub Copilot
  */
+// Modified by Brett Balquist for audio and timer
 function normalClickHandler(event: MouseEvent, tileMatrix: GridTile[][]) {
     const target = event.target as HTMLElement; // determine elememt clicked
 
@@ -162,8 +167,9 @@ function normalClickHandler(event: MouseEvent, tileMatrix: GridTile[][]) {
  * revealCell
  * Reveals a cell and applies flood-fill if needed.
  * Updated to include sound effects
- * Authors: Elizabeth Miller, GitHub Copilot, Brett Balquist
+ * Authors: Elizabeth Miller, GitHub Copilot
  */
+// Modified by Brett Balquist for audio and timer
 export function revealCell(row: number, col: number) {
     if (!minefield) return; // If minefield is not generated yet, exit....is this necessary
 

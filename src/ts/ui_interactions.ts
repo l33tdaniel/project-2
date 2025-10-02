@@ -17,7 +17,9 @@ let gameStarted = false;
 let mineCountSelected = false;
 
 /**
- Initialize all UI interactions
+ * Initialize all UI interactions
+ * Inputs: None
+ * Outputs: None
  */
 export function setupUIInteractions() {
     setupFloatingInstructions();
@@ -42,7 +44,9 @@ export function setupUIInteractions() {
 }
 
 /**
- Setup floating instructions panel
+ * Setup floating instructions panel
+ * Inputs: None
+ * Outputs: None
  */
 function setupFloatingInstructions() {
     const toggleBtn = document.getElementById('instructionsToggle');
@@ -85,7 +89,9 @@ function setupFloatingInstructions() {
 }
 
 /**
- Setup preset button functionality for mine count selection
+ * Setup preset button functionality for mine count selection
+ * Inputs: None
+ * Outputs: None
  */
 function setupPresetButtons() {
     const presetButtons = document.querySelectorAll('.preset-btn');
@@ -139,6 +145,8 @@ function setupPresetButtons() {
 
 /**
  * Setup about modal functionality (if not already handled)
+ * Inputs: None
+ * Outputs: None
  */
 function setupAboutModal() {
     const aboutBtn = document.getElementById('about-btn');
@@ -182,6 +190,8 @@ function setupAboutModal() {
 /**
  * Setup AI controls functionality
  * Handles AI selection changes and displays current selection
+ * Inputs: None
+ * Outputs: None
  */
 function setupAIControls() {
     const aiSelect = document.getElementById('aiDifficulty') as HTMLSelectElement;
@@ -210,6 +220,8 @@ function setupAIControls() {
 
 /**
  * Update the AI status display
+ * Inputs: string to change to and the html element that it is changing
+ * Outputs: None
  */
 function updateAIDisplay(aiValue: string, displayElement: HTMLElement): void {
     const displayText = getAIDisplayText(aiValue);
@@ -218,6 +230,8 @@ function updateAIDisplay(aiValue: string, displayElement: HTMLElement): void {
 
 /**
  * Get display text for AI selection
+ * Inputs: String that determines the difficulty
+ * Outputs: None
  */
 function getAIDisplayText(aiValue: string): string {
     switch (aiValue) {
@@ -230,7 +244,10 @@ function getAIDisplayText(aiValue: string): string {
 }
 
 /**
-ai selection */
+* ai selection 
+ * Inputs: String that determines difficulty
+ * Outputs: None
+*/
 function getAIDisplayName(aiValue: string): string {
     switch (aiValue) {
         case 'none': return 'None';
@@ -243,6 +260,8 @@ function getAIDisplayName(aiValue: string): string {
 
 /**
  * Disable AI selection during gameplay
+ * Inputs: None
+ * Outputs: None
  */
 function disableAISelection(): void {
     const aiSelect = document.getElementById('aiDifficulty') as HTMLSelectElement;
@@ -253,6 +272,8 @@ function disableAISelection(): void {
 
 /**
  * Enable AI selection when game is reset
+ * Inputs: None
+ * Outputs: None
  */
 function enableAISelection(): void {
     const aiSelect = document.getElementById('aiDifficulty') as HTMLSelectElement;
@@ -263,6 +284,8 @@ function enableAISelection(): void {
 
 /**
  * Disable mine count controls during gameplay
+ * Inputs: None
+ * Outputs: None
  */
 function disableMineCountControls(): void {
     const presetButtons = document.querySelectorAll('.preset-btn') as NodeListOf<HTMLButtonElement>;
@@ -284,6 +307,8 @@ function disableMineCountControls(): void {
 
 /**
  * Enable mine count controls when game is reset
+ * Inputs: None
+ * Outputs: None
  */
 function enableMineCountControls(): void {
     const presetButtons = document.querySelectorAll('.preset-btn') as NodeListOf<HTMLButtonElement>;
@@ -305,6 +330,8 @@ function enableMineCountControls(): void {
 
 /**
  Setup mine count validation and grid click prevention
+ * Inputs: None
+ * Outputs: None
  */
 function setupMineCountValidation() {
     const mineCountInput = document.getElementById('mineCount') as HTMLInputElement;
@@ -349,6 +376,8 @@ function setupMineCountValidation() {
 
 /**
   Show a non-intrusive toast message
+ * Inputs: String thats the message and a type var thats a string that can be 'info', 'warning', 'success', 'error' and defaults to 'info'
+ * Outputs: None
  */
 export function showToast(message: string, type: 'info' | 'warning' | 'success' | 'error' = 'info') {
     // Remove any existing toast
@@ -401,6 +430,8 @@ export function showToast(message: string, type: 'info' | 'warning' | 'success' 
 
 /**
  * Get color for toast type
+ * Inputs: string on what the Toast is
+ * Outputs: Hex value associated with that (as a string)
  */
 function getToastColor(type: string): string {
     switch (type) {

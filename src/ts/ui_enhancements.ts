@@ -24,6 +24,8 @@ let gameStarted = false;
 
 /**
  * Initialize all UI enhancements for the modern Minesweeper experience
+ * Inputs: None
+ * Outputs: None
  */
 export function initializeUIEnhancements(tileMatrix: GridTile[][]) {
     currentTileMatrix = tileMatrix;
@@ -38,6 +40,8 @@ export function initializeUIEnhancements(tileMatrix: GridTile[][]) {
 
 /**
  * Setup preset mine count buttons for quick game setup
+ * Inputs: None
+ * Outputs: None
  */
 function setupPresetButtons() {
     const presetButtons = document.querySelectorAll('.preset-btn');
@@ -65,6 +69,8 @@ function setupPresetButtons() {
 
 /**
  * Setup the about modal functionality
+ * Inputs: None
+ * Outputs: None
  */
 function setupModal() {
     const aboutBtn = document.getElementById('about-btn');
@@ -105,6 +111,8 @@ function setupModal() {
 
 /**
  * Enhanced AI controls with better UX
+ * Inputs: None
+ * Outputs: None
  */
 function setupAIControls() {
     const aiSelect = document.getElementById('aiDifficulty') as HTMLSelectElement;
@@ -145,6 +153,8 @@ function setupAIControls() {
 
 /**
  * Convert difficulty string to enum value
+ * Inputs: None
+ * Outputs: Difficulty
  */
 function getDifficultyFromString(difficulty: string): AIDifficulty | null {
     switch (difficulty) {
@@ -157,6 +167,8 @@ function getDifficultyFromString(difficulty: string): AIDifficulty | null {
 
 /**
  * Setup game instructions toggle
+ * Inputs: None
+ * Outputs: None
  */
 function setupGameInstructions() {
     const instructionsToggle = document.createElement('button');
@@ -193,6 +205,8 @@ function setupGameInstructions() {
 
 /**
  * Add visual feedback for various game states
+ * Inputs: None
+ * Outputs: None
  */
 function addVisualFeedback() {
     // Add game state updates
@@ -233,6 +247,8 @@ function addVisualFeedback() {
 
 /**
  * Enhance grid tile interactions with modern animations
+ * Inputs: None
+ * Outputs: None
  */
 function enhanceGridInteractions() {
     if (!currentTileMatrix) return;
@@ -268,6 +284,8 @@ function enhanceGridInteractions() {
 
 /**
  * Add ripple effect animation
+ * Inputs: None
+ * Outputs: None
  */
 function addRippleEffect(event: MouseEvent) {
     const target = event.target as HTMLElement;
@@ -300,6 +318,8 @@ function addRippleEffect(event: MouseEvent) {
 
 /**
  * Setup input validation with visual feedback
+ * Inputs: None
+ * Outputs: None
  */
 function setupInputValidation() {
     const mineCountInput = document.getElementById('mineCount') as HTMLInputElement;
@@ -321,6 +341,8 @@ function setupInputValidation() {
 
 /**
  * Show tooltip for user feedback
+ * Inputs: HTML element and string
+ * Outputs: None
  */
 function showTooltip(element: HTMLElement, message: string) {
     const tooltip = document.createElement('div');

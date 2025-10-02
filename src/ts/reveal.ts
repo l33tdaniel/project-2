@@ -141,15 +141,20 @@ function normalClickHandler(event: MouseEvent, tileMatrix: GridTile[][]) {
 
     // Do the pick difficulty depending on the AI and do that move
     if (aiDifficulty !== "none" && minefield) {
-        let difficulty: AIDifficulty;
-        if (aiDifficulty === "easy") {
-            difficulty = AIDifficulty.Easy;
-        } else if (aiDifficulty === "medium") {
-            difficulty = AIDifficulty.Medium;
-        } else {
-            difficulty = AIDifficulty.Hard;
-        }
-        makeAIMove(difficulty, minefield, tileMatrix);
+        setTimeout(() => {
+            // This inner check resolves the TypeScript error
+            if (minefield) {
+                let difficulty: AIDifficulty;
+                if (aiDifficulty === "easy") {
+                    difficulty = AIDifficulty.Easy;
+                } else if (aiDifficulty === "medium") {
+                    difficulty = AIDifficulty.Medium;
+                } else {
+                    difficulty = AIDifficulty.Hard;
+                }
+                makeAIMove(difficulty, minefield, tileMatrix);
+            }
+        }, 1000); // 1-second delay
     }
 }
 
@@ -314,4 +319,3 @@ function getCellElement(row: number, col: number): HTMLElement | null {
     if (!rowDiv) return null; // if row doesn't exist, return null
     return rowDiv.children[col] as HTMLElement; // otherwise, return the div element for the specific cell at [row, col]
 }
-

@@ -11,3 +11,5 @@
 - As a player I’d like the game to look more aesthetically pleasing so I want to play more. 
 - As a player I’d like to have some sort of AI that could assist me and possibly take turns with me so that I don’t have to complete the game alone 
 - As a player I want to have sound effects and animations for uncovering mines. 
+
+Unfinished: AI playing automatically until it wins or loses
